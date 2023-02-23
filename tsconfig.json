@@ -2,6 +2,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@elementalconcept/ngx-dynamic-form": [
+        "dist/elementalconcept/ngx-dynamic-form"
+      ],
+      "@elementalconcept/ngx-dynamic-form-material": [
+        "dist/elementalconcept/ngx-dynamic-form-material"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
