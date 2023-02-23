@@ -1,0 +1,22 @@
+<mat-form-field *ngIf="visible"
+                [formGroup]="formGroup"
+                [floatLabel]="compiledConfig.meta.floatLabel"
+                [appearance]="compiledConfig.meta.appearance"
+                [hintLabel]="compiledConfig.meta.hintLabel"
+                [hideRequiredMarker]="compiledConfig.meta.hideRequiredMarker"
+                [ngClass]="compiledConfig.meta.cssClass"
+                [color]="compiledConfig.meta.color">
+
+  <mat-label>{{ compiledConfig.label }}</mat-label>
+
+  <mat-error *ngFor="let error of errors">{{ compiledConfig.errors[ error ] }}</mat-error>
+
+  <textarea [attr.type]="inputType"
+            [attr.inputmode]="inputMode"
+            [placeholder]="compiledConfig.placeholder"
+            [required]="required"
+            [formControlName]="compiledConfig.id"
+            matInput>
+  </textarea>
+
+</mat-form-field>

@@ -1,0 +1,20 @@
+<mat-form-field *ngIf="visible"
+                [formGroup]="formGroup"
+                [floatLabel]="compiledConfig.meta.floatLabel"
+                [appearance]="compiledConfig.meta.appearance"
+                [hintLabel]="compiledConfig.meta.hintLabel"
+                [hideRequiredMarker]="compiledConfig.meta.hideRequiredMarker"
+                [ngClass]="compiledConfig.meta.cssClass"
+                [color]="compiledConfig.meta.color">
+
+  <mat-label>{{ compiledConfig.label }}</mat-label>
+
+  <mat-error *ngFor="let error of errors">{{ compiledConfig.errors[ error ] }}</mat-error>
+
+  <mat-select [required]="required" [formControlName]="compiledConfig.id">
+    <mat-option *ngFor="let option of compiledConfig.options" [value]="option.value">
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
+
+</mat-form-field>

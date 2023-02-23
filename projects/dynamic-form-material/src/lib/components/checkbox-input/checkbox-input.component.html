@@ -1,0 +1,21 @@
+<div *ngIf="visible"
+     [formGroup]="formGroup"
+     [ngClass]="compiledConfig.meta.cssClass">
+
+  <mat-checkbox [formControlName]="compiledConfig.id"
+                [labelPosition]="compiledConfig.meta.labelPosition"
+                [color]="compiledConfig.meta.color">
+
+    {{ compiledConfig.label }}<span *ngIf="required && !compiledConfig.meta.hideRequiredMarker" class="required-mark">*</span>
+
+    <a *ngIf="compiledConfig.meta.externalLink"
+       [href]="compiledConfig.meta.externalLink.url"
+       (click)="openExternalLink($event)"
+       target="_blank">
+      {{ compiledConfig.meta.externalLink.label }}
+    </a>
+
+  </mat-checkbox>
+
+  <mat-error *ngFor="let error of errors">{{ compiledConfig.errors[ error ] }}</mat-error>
+</div>

@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 8px;
+  }
+
+  .mat-radio-button {
+    margin-right: 12px;
+  }
+}

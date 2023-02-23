@@ -1,0 +1,7 @@
+<div *ngIf="visible && !dynamicFormElement?.meta?.sectionTitle"
+     [innerHTML]="dynamicFormElement?.meta?.htmlDescription">
+</div>
+
+<h5 *ngIf="visible && dynamicFormElement?.meta?.sectionTitle === true" class="section-title">
+  {{ dynamicFormElement?.label }}
+</h5>

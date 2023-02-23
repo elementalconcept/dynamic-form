@@ -100,23 +100,23 @@
         }
       }
     },
-    "@elementalconcept/ngx-dynamic-form": {
+    "dynamic-form": {
       "projectType": "library",
-      "root": "projects/elementalconcept/ngx-dynamic-form",
-      "sourceRoot": "projects/elementalconcept/ngx-dynamic-form/src",
+      "root": "projects/dynamic-form",
+      "sourceRoot": "projects/dynamic-form/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/elementalconcept/ngx-dynamic-form/ng-package.json"
+            "project": "projects/dynamic-form/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/elementalconcept/ngx-dynamic-form/tsconfig.lib.prod.json"
+              "tsConfig": "projects/dynamic-form/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/elementalconcept/ngx-dynamic-form/tsconfig.lib.json"
+              "tsConfig": "projects/dynamic-form/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -124,7 +124,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/elementalconcept/ngx-dynamic-form/tsconfig.spec.json",
+            "tsConfig": "projects/dynamic-form/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
@@ -133,23 +133,23 @@
         }
       }
     },
-    "@elementalconcept/ngx-dynamic-form-material": {
+    "dynamic-form-material": {
       "projectType": "library",
-      "root": "projects/elementalconcept/ngx-dynamic-form-material",
-      "sourceRoot": "projects/elementalconcept/ngx-dynamic-form-material/src",
+      "root": "projects/dynamic-form-material",
+      "sourceRoot": "projects/dynamic-form-material/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/elementalconcept/ngx-dynamic-form-material/ng-package.json"
+            "project": "projects/dynamic-form-material/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/elementalconcept/ngx-dynamic-form-material/tsconfig.lib.prod.json"
+              "tsConfig": "projects/dynamic-form-material/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/elementalconcept/ngx-dynamic-form-material/tsconfig.lib.json"
+              "tsConfig": "projects/dynamic-form-material/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -157,7 +157,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/elementalconcept/ngx-dynamic-form-material/tsconfig.spec.json",
+            "tsConfig": "projects/dynamic-form-material/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
