@@ -1,24 +1,95 @@
-# NgxDynamicFormMaterial
+# Material Components For Dynamic Form
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+**MatSelectModule import in AppModule!**
 
-## Code scaffolding
+This is a set of wrappers for Material input components for
+[Dynamic Form](https://bitbucket.org/elementalconcept/ec-fe-components/src/dev/projects/dynamic-form/) library. Angular
+v11+ and Material For Angular v11+ is required. Provided input types are:
 
-Run `ng generate component component-name --project ngx-dynamic-form-material` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-dynamic-form-material`.
-> Note: Don't forget to add `--project ngx-dynamic-form-material` or else it will be added to the default project in your `angular.json` file. 
+* `string`
+* `number`
+* `email`
+* `tel`
+* `url`
+* `password`
+* `select`
+* `multiselect`
+* `text`
+* `checkbox`
+* `radio`
+* `_description_`
 
-## Build
+## Installation
 
-Run `ng build ngx-dynamic-form-material` to build the project. The build artifacts will be stored in the `dist/` directory.
+Install the library through NPM:
 
-## Publishing
+```shell
+$ npm i @elemental/dynamic-form-material
+```
 
-After building your library with `ng build ngx-dynamic-form-material`, go to the dist folder `cd dist/ngx-dynamic-form-material` and run `npm publish`.
+Add `MatSelectModule` import and provider `DYNAMIC_FORM_COMPONENT_MAP` to your `AppModule`, then
+add `DynamicFormMaterialModule` to your page modules.
 
-## Running unit tests
+```typescript
+// app.module.ts
+import { NgModule } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
+import { DYNAMIC_FORM_COMPONENT_MAP } from '@elemental/dynamic-form';
+import { materialComponentMap } from '@elemental/dynamic-form-material';
+import { AppComponent } from './app.component';
 
-Run `ng test ngx-dynamic-form-material` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@NgModule({
+  imports: [
+    MatSelectModule
+  ],
+  providers: [
+    { provide: DYNAMIC_FORM_COMPONENT_MAP, useValue: materialComponentMap }
+  ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule {
+}
+```
 
-## Further help
+```typescript
+// form-page.module.ts
+import { DynamicFormModule } from '@elemental/dynamic-form';
+import { DynamicFormMaterialModule } from '@elemental/dynamic-form-material';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+@NgModule({
+  imports: [
+    DynamicFormModule,
+    DynamicFormMaterialModule
+  ]
+})
+class FormPageModule {
+}
+```
+
+## Available Meta Options
+
+These options are based on Material library options, please refer
+to [Material documentation](https://material.angular.io/components/categories) for more details.
+
+```typescript
+interface MaterialInputMeta {
+  appearance?: MatFormFieldAppearance;
+  floatLabel?: FloatLabelType;
+  hintLabel?: string;
+  labelPosition?: 'after' | 'before';
+  cssClass?: string;
+  color?: ThemePalette;
+  suffix?: SuffixMeta;
+  htmlDescription?: string;
+  hideRequiredMarker?: boolean;
+}
+
+interface SuffixMeta {
+  type: SuffixType;
+}
+
+enum SuffixType {
+  label = 'label',
+  password = 'password'
+}
+```
