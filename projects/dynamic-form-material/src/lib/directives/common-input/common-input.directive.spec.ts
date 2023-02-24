@@ -1,7 +1,7 @@
 import { UntypedFormControl, Validators } from '@angular/forms';
 import { fakeAsync, tick } from '@angular/core/testing';
 
-import { DynamicFormValidator } from '@elementalconcept/ngx-dynamic-form';
+import { DynamicFormValidator } from '@elemental-concept/ngx-dynamic-form';
 
 import { CommonInputDirective } from './common-input.directive';
 

@@ -1,4 +1,4 @@
-<p [formGroup]="formGroup" *ngIf="visible">
+<p *ngIf="visible && config && formGroup" [formGroup]="formGroup">
   <label>
     {{ config.label }}
     <input [attr.type]="inputType"

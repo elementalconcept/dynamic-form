@@ -2,23 +2,23 @@
 
 <p>Some examples here</p>
 
-<h3>Dynamic Form plain html components</h3>
+<!--<h3>Dynamic Form plain html components</h3>-->
 
-<div class="wrapper">
-  <ngx-dynamic-form [config]="customConfig"
-                    [value]="customValue"
-                    [componentMap]="customComponentMap"
+<!--<div class="wrapper">-->
+<!--  <ngx-dynamic-form [config]="customConfig"-->
+<!--                    [value]="customValue"-->
+<!--                    [componentMap]="customComponentMap"-->
 
-                    (statusChanges)="onCustomVStatusChanges($event)"
-                    (valueChanges)="onCustomValueChanges($event)">
-  </ngx-dynamic-form>
+<!--                    (statusChanges)="onCustomVStatusChanges($event)"-->
+<!--                    (valueChanges)="onCustomValueChanges($event)">-->
+<!--  </ngx-dynamic-form>-->
 
-  <div class="results">
-    <p>Result</p>
-    <pre>{{ customStatus?.status | json }}</pre>
-    <pre>{{ customFormValue?.value | json }}</pre>
-  </div>
-</div>
+<!--  <div class="results">-->
+<!--    <p>Result</p>-->
+<!--    <pre>{{ customStatus }}</pre>-->
+<!--    <pre>{{ customFormValue | json }}</pre>-->
+<!--  </div>-->
+<!--</div>-->
 
 <h3>Dynamic Form With Material components</h3>
 
@@ -54,7 +54,7 @@
 
   <div class="results">
     <p>Result</p>
-    <pre>{{ materialStatus?.status | json }}</pre>
-    <pre>{{ materialFormValue?.value | json }}</pre>
+    <pre>{{ materialStatus }}</pre>
+    <pre>{{ materialFormValue | json }}</pre>
   </div>
 </div>

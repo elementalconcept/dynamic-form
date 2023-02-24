@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { NgxDynamicFormMaterialModule } from '@elementalconcept/ngx-dynamic-form-material';
-import { NgxDynamicFormModule } from '@elementalconcept/ngx-dynamic-form';
+import { NgxDynamicFormMaterialModule } from '@elemental-concept/ngx-dynamic-form-material';
+import { NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
 
 import { AppComponent } from './app.component';
 

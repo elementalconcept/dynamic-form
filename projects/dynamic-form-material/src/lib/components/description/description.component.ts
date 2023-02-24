@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
-import { DynamicFormDescriptionControl, DynamicFormElement } from '@elementalconcept/ngx-dynamic-form';
+import { DynamicFormDescriptionControl, DynamicFormElement } from '@elemental-concept/ngx-dynamic-form';
 
 import { MaterialInputMeta } from '../../types';
 

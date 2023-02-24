@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 
-import { DynamicFormElement, DynamicFormPassThroughControl } from '@elementalconcept/ngx-dynamic-form';
+import { DynamicFormElement, DynamicFormPassThroughControl } from '@elemental-concept/ngx-dynamic-form';
 
 import { inputModeMap } from '../../types';
 

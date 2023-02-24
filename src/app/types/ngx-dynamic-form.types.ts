@@ -1,4 +1,4 @@
-import { DynamicFormComponentMap, DynamicFormConfig } from '@elementalconcept/ngx-dynamic-form';
+import { DynamicFormComponentMap, DynamicFormConfig } from '@elemental-concept/ngx-dynamic-form';
 
 import { StringInputComponent } from '../components';
 

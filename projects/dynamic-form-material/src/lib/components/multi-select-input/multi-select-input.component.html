@@ -1,29 +1,29 @@
-<mat-form-field *ngIf="visible && formGroup"
+<mat-form-field *ngIf="visible && config && formGroup"
                 [formGroup]="formGroup"
-                [floatLabel]="compiledConfig.meta.floatLabel"
-                [appearance]="compiledConfig.meta.appearance"
-                [hintLabel]="compiledConfig.meta.hintLabel"
-                [hideRequiredMarker]="compiledConfig.meta.hideRequiredMarker"
-                [ngClass]="compiledConfig.meta.cssClass"
-                [color]="compiledConfig.meta.color">
+                [floatLabel]="config.meta?.floatLabel"
+                [appearance]="config.meta?.appearance"
+                [hintLabel]="config.meta?.hintLabel"
+                [hideRequiredMarker]="config.meta?.hideRequiredMarker"
+                [ngClass]="config.meta?.cssClass"
+                [color]="config.meta?.color">
 
-  <mat-label>{{ compiledConfig.label }}</mat-label>
+  <mat-label>{{ config.label }}</mat-label>
 
-  <mat-error *ngFor="let error of errors">{{ compiledConfig.errors[ error ] }}</mat-error>
+  <mat-error *ngFor="let error of errors">{{ config.errors[ error ] }}</mat-error>
 
   <mat-select [required]="required"
-              [formControlName]="compiledConfig.id"
+              [formControlName]="config.id"
               multiple>
 
     <mat-select-trigger>
-      {{ formGroup.value[ compiledConfig.id ] ? formGroup.value[ compiledConfig.id ][ 0 ] : '' }}
-      <span *ngIf="formGroup.value[compiledConfig.id]?.length > 1" class="additional-selection">
-        (+{{ formGroup.value[ compiledConfig.id ].length - 1 }}
-        {{ formGroup.value[ compiledConfig.id ]?.length === 2 ? 'other' : 'others' }})
+      {{ formGroup.value[ config.id ] ? formGroup.value[ config.id ][ 0 ] : '' }}
+      <span *ngIf="formGroup.value[config.id]?.length > 1" class="additional-selection">
+        (+{{ formGroup.value[ config.id ].length - 1 }}
+        {{ formGroup.value[ config.id ]?.length === 2 ? 'other' : 'others' }})
       </span>
     </mat-select-trigger>
 
-    <mat-option *ngFor="let option of compiledConfig.options" [value]="option.value">
+    <mat-option *ngFor="let option of config.options" [value]="option.value">
       {{ option.label }}
     </mat-option>
 

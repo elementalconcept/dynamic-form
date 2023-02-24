@@ -1,21 +1,21 @@
-<mat-label *ngIf="visible && compiledConfig.label">{{ compiledConfig.label }}</mat-label>
+<mat-label *ngIf="visible && config && config.label">{{ config.label }}</mat-label>
 
-<div *ngIf="visible"
+<div *ngIf="visible && config && formGroup"
      [formGroup]="formGroup"
-     [ngClass]="compiledConfig.meta?.cssClass">
+     [ngClass]="config.meta?.cssClass">
 
   <div class="radio-wrapper">
-    <mat-radio-group [formControlName]="compiledConfig.id"
+    <mat-radio-group [formControlName]="config.id"
                      [required]="required"
-                     [labelPosition]="compiledConfig.meta.labelPosition"
-                     [color]="compiledConfig.meta.color">
+                     [labelPosition]="config.meta?.labelPosition"
+                     [color]="config.meta?.color">
 
-      <mat-radio-button *ngFor="let option of compiledConfig.options" [value]="option.value">
-        {{ option.label }}<span *ngIf="required && !compiledConfig.meta.hideRequiredMarker" class="required-mark">*</span>
+      <mat-radio-button *ngFor="let option of config.options" [value]="option.value">
+        {{ option.label }}<span *ngIf="required && !config.meta?.hideRequiredMarker" class="required-mark">*</span>
       </mat-radio-button>
 
     </mat-radio-group>
   </div>
 
-  <mat-error *ngFor="let error of errors">{{ compiledConfig.errors[ error ] }}</mat-error>
+  <mat-error *ngFor="let error of errors">{{ config.errors[ error ] }}</mat-error>
 </div>

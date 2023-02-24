@@ -1,6 +1,6 @@
-import { DynamicFormConfig } from '@elementalconcept/ngx-dynamic-form';
+import { DynamicFormConfig } from '@elemental-concept/ngx-dynamic-form';
 
-import { MaterialInputMeta } from '@elementalconcept/ngx-dynamic-form-material';
+import { MaterialInputMeta } from '@elemental-concept/ngx-dynamic-form-material';
 
 export const materialConfig: DynamicFormConfig<MaterialInputMeta> = {
   elements: [

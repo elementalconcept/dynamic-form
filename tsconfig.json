@@ -3,10 +3,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@elementalconcept/ngx-dynamic-form": [
+      "@elemental-concept/ngx-dynamic-form": [
         "dist/dynamic-form"
       ],
-      "@elementalconcept/ngx-dynamic-form-material": [
+      "@elemental-concept/ngx-dynamic-form-material": [
         "dist/dynamic-form-material"
       ]
     },

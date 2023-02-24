@@ -1,4 +1,4 @@
-import { DynamicFormComponentMap } from '@elementalconcept/ngx-dynamic-form';
+import { DynamicFormComponentMap } from '@elemental-concept/ngx-dynamic-form';
 
 import { MaterialInputMeta } from './types';
 

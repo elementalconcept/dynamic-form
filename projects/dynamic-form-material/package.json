@@ -1,5 +1,5 @@
 {
-  "name": "@elementalconcept/ngx-dynamic-form-material",
+  "name": "@elemental-concept/ngx-dynamic-form-material",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^15.0.0",

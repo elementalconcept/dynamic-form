@@ -1,18 +1,18 @@
-<mat-form-field *ngIf="visible"
+<mat-form-field *ngIf="visible && config && formGroup"
                 [formGroup]="formGroup"
-                [floatLabel]="compiledConfig.meta.floatLabel"
-                [appearance]="compiledConfig.meta.appearance"
-                [hintLabel]="compiledConfig.meta.hintLabel"
-                [hideRequiredMarker]="compiledConfig.meta.hideRequiredMarker"
-                [ngClass]="compiledConfig.meta.cssClass"
-                [color]="compiledConfig.meta.color">
+                [floatLabel]="config.meta?.floatLabel"
+                [appearance]="config.meta?.appearance"
+                [hintLabel]="config.meta?.hintLabel"
+                [hideRequiredMarker]="config.meta?.hideRequiredMarker"
+                [ngClass]="config.meta?.cssClass"
+                [color]="config.meta?.color">
 
-  <mat-label>{{ compiledConfig.label }}</mat-label>
+  <mat-label>{{ config.label }}</mat-label>
 
-  <mat-error *ngFor="let error of errors">{{ compiledConfig.errors[ error ] }}</mat-error>
+  <mat-error *ngFor="let error of errors">{{ config.errors[ error ] }}</mat-error>
 
-  <mat-select [required]="required" [formControlName]="compiledConfig.id">
-    <mat-option *ngFor="let option of compiledConfig.options" [value]="option.value">
+  <mat-select [required]="required" [formControlName]="config.id">
+    <mat-option *ngFor="let option of config.options" [value]="option.value">
       {{ option.label }}
     </mat-option>
   </mat-select>

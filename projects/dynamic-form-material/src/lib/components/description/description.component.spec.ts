@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { DynamicFormModule } from '@elemental/dynamic-form';
+import { NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
 
 import { DescriptionComponent } from './description.component';
 
@@ -13,7 +13,7 @@ describe('DescriptionComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DescriptionComponent ],
       imports: [
-        DynamicFormModule
+        NgxDynamicFormModule
       ],
       schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
     })

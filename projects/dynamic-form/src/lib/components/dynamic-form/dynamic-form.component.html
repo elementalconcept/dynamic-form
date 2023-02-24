@@ -1,6 +1,9 @@
 <ng-content select=".before-form"></ng-content>
 
-<form *ngIf="formReady" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+<form *ngIf="formReady"
+      [formGroup]="formGroup"
+      (ngSubmit)="onSubmit()">
+
   <ng-content select=".form-header"></ng-content>
 
   <ng-container #formElement></ng-container>

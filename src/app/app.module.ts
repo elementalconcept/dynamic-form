@@ -10,8 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-import { DYNAMIC_FORM_COMPONENT_MAP, NgxDynamicFormModule } from '@elementalconcept/ngx-dynamic-form';
-import { materialComponentMap, NgxDynamicFormMaterialModule } from '@elementalconcept/ngx-dynamic-form-material';
+import { DYNAMIC_FORM_COMPONENT_MAP, NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
+import { materialComponentMap, NgxDynamicFormMaterialModule } from '@elemental-concept/ngx-dynamic-form-material';
 
 import { AppComponent } from './app.component';
 
