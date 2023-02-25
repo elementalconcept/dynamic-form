@@ -1,0 +1,22 @@
+<mat-form-field *ngIf="visible && config && formGroup"
+                [formGroup]="formGroup"
+                [floatLabel]="config.meta?.floatLabel"
+                [appearance]="config.meta?.appearance"
+                [hintLabel]="config.meta?.hintLabel"
+                [hideRequiredMarker]="config.meta?.hideRequiredMarker"
+                [ngClass]="config.meta?.cssClass"
+                [color]="config.meta?.color">
+
+  <mat-label>{{ config.label }}</mat-label>
+
+  <mat-error *ngFor="let error of errors">{{ config.errors[ error ] }}</mat-error>
+
+  <textarea [attr.type]="inputType"
+            [attr.inputmode]="inputMode"
+            [placeholder]="config.placeholder"
+            [required]="required"
+            [formControlName]="config.id"
+            matInput>
+  </textarea>
+
+</mat-form-field>

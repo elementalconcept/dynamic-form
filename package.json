@@ -3,21 +3,32 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start-4301": "ng serve --port=4301",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-form": "ng build dynamic-form --configuration production",
+    "build-form-material": "ng build dynamic-form-material --configuration production",
+    "watch-form": "ng build dynamic-form --watch",
+    "watch-form-material": "ng build dynamic-form-material --watch",
+    "publish-form": "npm run build-form && npm publish ./dist/dynamic-form",
+    "publish-form-material": "npm run build-form-material && npm publish ./dist/dynamic-form-material"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^15.0.0",
+    "@angular/cdk": "~15.2.0",
     "@angular/common": "^15.0.0",
     "@angular/compiler": "^15.0.0",
     "@angular/core": "^15.0.0",
     "@angular/forms": "^15.0.0",
+    "@angular/material": "~15.2.0",
     "@angular/platform-browser": "^15.0.0",
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
+    "@ngneat/until-destroy": "^9.2.3",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -33,6 +44,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "ng-packagr": "^15.0.0",
     "typescript": "~4.8.2"
   }
 }

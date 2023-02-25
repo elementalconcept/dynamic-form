@@ -1,0 +1,32 @@
+:host {
+  display: block;
+}
+
+.example-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+
+  .example {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+  }
+
+  .wrapper {
+    display: flex;
+    margin-top: 24px;
+
+    ngx-dynamic-form,
+    .results {
+      flex: 1;
+    }
+
+    .results {
+      max-width: 300px;
+      margin-left: 32px;
+    }
+  }
+}
