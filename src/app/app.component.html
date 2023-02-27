@@ -2,65 +2,20 @@
 
 <p>Some examples here</p>
 
-<div class="example-wrapper">
-  <div class="example">
-    <h3>Dynamic Form plain html components</h3>
+<h3>Dynamic Form plain html components</h3>
 
-    <div class="wrapper">
-      <ngx-dynamic-form [config]="customConfig"
-                        [value]="customValue"
-                        [componentMap]="customComponentMap"
-                        (statusChanges)="onCustomVStatusChanges($event)"
-                        (valueChanges)="onCustomValueChanges($event)"
-                        class="simple-form">
-      </ngx-dynamic-form>
+<div class="wrapper">
+  <ngx-dynamic-form [config]="customConfig"
+                    [value]="customValue"
+                    [componentMap]="customComponentMap"
+                    (statusChanges)="onCustomVStatusChanges($event)"
+                    (valueChanges)="onCustomValueChanges($event)"
+                    class="simple-form">
+  </ngx-dynamic-form>
 
-      <div class="results">
-        <p>Result</p>
-        <pre>{{ customStatus }}</pre>
-        <pre>{{ customFormValue | json }}</pre>
-      </div>
-    </div>
-  </div>
-
-  <div class="example">
-    <h3>Dynamic Form With Material components</h3>
-
-    <div class="wrapper">
-      <ngx-dynamic-form [config]="materialConfig"
-                        [value]="materialValue"
-                        [componentMap]="materialComponentMap"
-                        (statusChanges)="onMaterialChanges($event)"
-                        (valueChanges)="onMaterialValueChanges($event)"
-                        class="material-form">
-
-        <h3 class="before-form">Material form is below</h3>
-
-        <div class="form-header">
-          Form header
-        </div>
-
-        <div class="form-footer">
-          <p>
-            Form footer. Buttons should go here usually.
-          </p>
-
-          <p>
-            <button mat-stroked-button color="primary">OK!</button>
-          </p>
-        </div>
-
-        <div class="after-form">
-          After the form
-        </div>
-
-      </ngx-dynamic-form>
-
-      <div class="results">
-        <p>Result</p>
-        <pre>{{ materialStatus }}</pre>
-        <pre>{{ materialFormValue | json }}</pre>
-      </div>
-    </div>
+  <div class="results">
+    <p>Result</p>
+    <pre>{{ customStatus }}</pre>
+    <pre>{{ customFormValue | json }}</pre>
   </div>
 </div>

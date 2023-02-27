@@ -3,27 +3,27 @@
 This library generates Angular `FormGroup` and related DOM from a specified JSON configuration. Such configuration can
 either be baked in into the application or received dynamically from back-end. Exact form input fields are NOT part of
 the library and must be provided by a library user. A set of Material based input components can be found in
-[Material Components For Dynamic Form](https://bitbucket.org/elementalconcept/ec-fe-components/src/dev/projects/dynamic-form-material/)
+[Material Components For Ngx Dynamic Form](https://github.com/elementalconcept/ngx-dynamic-form-material/)
 .
-`Dynamic Form` is only compatible with Angular v11+.
+`Ngx Dynamic Form` is only compatible with Angular v11+.
 
 ## Installation
 
 Install the library through NPM:
 
 ```shell
-$ npm i @elemental/dynamic-form
+$ npm i @elemental-concept/ngx-dynamic-form
 ```
 
-`DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
+`NgxDynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
 
 ```typescript
-import { DynamicFormModule } from '@elemental/dynamic-form';
+import { NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
 
 @NgModule({
   imports: [
-    DynamicFormModule,
+    NgxDynamicFormModule,
   ]
 })
 class SomeModule {
@@ -409,99 +409,3 @@ A simple key-value map between error codes and their messages.
 
 This section is not finished yet. Please check the source code in the sample app on how it's done as well as
 *Material Components For Dynamic Form* mentioned earlier.
-
-# Material Components For Dynamic Form
-
-**MatSelectModule import in AppModule!**
-
-This is a set of wrappers for Material input components for
-[Dynamic Form](https://bitbucket.org/elementalconcept/ec-fe-components/src/dev/projects/dynamic-form/) library. Angular
-v11+ and Material For Angular v11+ is required. Provided input types are:
-
-* `string`
-* `number`
-* `email`
-* `tel`
-* `url`
-* `password`
-* `select`
-* `multiselect`
-* `text`
-* `checkbox`
-* `radio`
-* `_description_`
-
-## Installation
-
-Install the library through NPM:
-
-```shell
-$ npm i @elemental/dynamic-form-material
-```
-
-Add `MatSelectModule` import and provider `DYNAMIC_FORM_COMPONENT_MAP` to your `AppModule`, then
-add `DynamicFormMaterialModule` to your page modules.
-
-```typescript
-// app.module.ts
-import { NgModule } from '@angular/core';
-import { MatSelectModule } from '@angular/material/select';
-import { DYNAMIC_FORM_COMPONENT_MAP } from '@elemental/dynamic-form';
-import { materialComponentMap } from '@elemental/dynamic-form-material';
-import { AppComponent } from './app.component';
-
-@NgModule({
-  imports: [
-    MatSelectModule
-  ],
-  providers: [
-    { provide: DYNAMIC_FORM_COMPONENT_MAP, useValue: materialComponentMap }
-  ],
-  bootstrap: [ AppComponent ]
-})
-export class AppModule {
-}
-```
-
-```typescript
-// form-page.module.ts
-import { DynamicFormModule } from '@elemental/dynamic-form';
-import { DynamicFormMaterialModule } from '@elemental/dynamic-form-material';
-
-@NgModule({
-  imports: [
-    DynamicFormModule,
-    DynamicFormMaterialModule
-  ]
-})
-class FormPageModule {
-}
-```
-
-## Available Meta Options
-
-These options are based on Material library options, please refer
-to [Material documentation](https://material.angular.io/components/categories) for more details.
-
-```typescript
-interface MaterialInputMeta {
-  appearance?: MatFormFieldAppearance;
-  floatLabel?: FloatLabelType;
-  hintLabel?: string;
-  labelPosition?: 'after' | 'before';
-  cssClass?: string;
-  color?: ThemePalette;
-  suffix?: SuffixMeta;
-  htmlDescription?: string;
-  hideRequiredMarker?: boolean;
-}
-
-interface SuffixMeta {
-  type: SuffixType;
-}
-
-enum SuffixType {
-  label = 'label',
-  password = 'password'
-}
-```
