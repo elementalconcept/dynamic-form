@@ -4,10 +4,7 @@
   "compilerOptions": {
     "paths": {
       "@elemental-concept/ngx-dynamic-form": [
-        "dist/dynamic-form"
-      ],
-      "@elemental-concept/ngx-dynamic-form-material": [
-        "dist/dynamic-form-material"
+        "dist/lib"
       ]
     },
     "allowUnreachableCode": false,

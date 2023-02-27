@@ -1,4 +1,4 @@
-import { DynamicFormConfig } from '../lib/types/dynamic-form.config';
+import { DynamicFormConfig } from '../lib/types';
 
 const simpleForm: DynamicFormConfig<void> = {
   elements: [

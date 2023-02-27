@@ -12,7 +12,7 @@ the library and must be provided by a library user. A set of Material based inpu
 Install the library through NPM:
 
 ```shell
-$ npm i @elemental/dynamic-form
+$ npm i @elemental-concept/ngx-dynamic-form
 ```
 
 `DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such

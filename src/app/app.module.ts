@@ -10,8 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-import { DYNAMIC_FORM_COMPONENT_MAP, NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
-import { materialComponentMap, NgxDynamicFormMaterialModule } from '@elemental-concept/ngx-dynamic-form-material';
+import { NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
 
 import { AppComponent } from './app.component';
 
@@ -42,13 +41,8 @@ export function httpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
 
     NgxDynamicFormModule,
-    NgxDynamicFormMaterialModule,
 
     MatButtonModule
-  ],
-  providers: [
-    // Dynamic Form mapping object using Dynamic Form Material map
-    { provide: DYNAMIC_FORM_COMPONENT_MAP, useValue: materialComponentMap }
   ],
   bootstrap: [ AppComponent ]
 })
