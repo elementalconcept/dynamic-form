@@ -6,9 +6,9 @@
     "start-4301": "ng serve --port=4301",
     "build": "ng build lib --configuration production",
     "watch": "ng build lib --watch",
-    "publish": "npm run build && npm publish ./dist/lib"
+    "publish": "npm run build && npm publish ./dist/lib --access=public"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^15.0.0",
     "@angular/cdk": "~15.2.0",
