@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
 
-import { DynamicFormComponentStatus, DynamicFormComponentValue } from '@elemental-concept/dynamic-form';
+import {
+  DynamicFormComponentStatus,
+  DynamicFormComponentValue,
+  DynamicFormConfig,
+  TranslationFilterService
+} from '@elemental-concept/dynamic-form';
 
-import { customComponentMap, customConfig, customValue } from './types';
+import { Observable } from 'rxjs';
+
+import { customComponentMap, customConfig, customValue, FormValue } from './types';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +17,18 @@ import { customComponentMap, customConfig, customValue } from './types';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  customConfig = customConfig;
+  customConfig$: Observable<DynamicFormConfig<unknown>>;
+
   customValue = customValue;
   customComponentMap = customComponentMap;
   customStatus: string;
-  customFormValue = {};
+  customFormValue: FormValue = customValue;
+
+  constructor(private readonly translationFilterService: TranslationFilterService) {
+    this.customConfig$ = this.translationFilterService.wrap(customConfig);
+  }
 
   onCustomVStatusChanges = (data: DynamicFormComponentStatus) => this.customStatus = data.status;
 
-  onCustomValueChanges = (data: DynamicFormComponentValue) => this.customFormValue = data.value;
+  onCustomValueChanges = (data: DynamicFormComponentValue) => this.customFormValue = data.value as FormValue;
 }

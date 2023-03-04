@@ -1,11 +1,11 @@
-<h2>Dynamic Form</h2>
+<h2>{{ "module.auth.login.page.title" | translate }}</h2>
 
 <p>Some examples here</p>
 
 <h3>Dynamic Form plain html components</h3>
 
 <div class="wrapper">
-  <dynamic-form [config]="customConfig"
+  <dynamic-form [config]="customConfig$ | async"
                 [value]="customValue"
                 [componentMap]="customComponentMap"
                 (statusChanges)="onCustomVStatusChanges($event)"
