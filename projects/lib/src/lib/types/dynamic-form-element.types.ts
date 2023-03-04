@@ -1,7 +1,7 @@
 import { DynamicFormElementOption } from './dynamic-form-element-option.types';
 import { DynamicFormElementRelationship } from './dynamic-form-element-relationship.types';
-import { DynamicFormValidator } from './dynamic-form-validator.types';
 import { DynamicFormErrors } from './dynamic-form-errors.types';
+import { DynamicFormValidator } from './dynamic-form-validator.types';
 
 export interface DynamicFormElement<M> {
   id: string;

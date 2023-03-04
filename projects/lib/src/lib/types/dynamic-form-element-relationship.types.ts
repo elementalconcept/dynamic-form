@@ -26,8 +26,8 @@ export interface DynamicFormElementRelationshipIsNotSet extends DynamicFormEleme
 }
 
 export type DynamicFormElementRelationship =
-  DynamicFormElementRelationshipEquals |
-  DynamicFormElementRelationshipLessThan |
-  DynamicFormElementRelationshipMoreThan |
-  DynamicFormElementRelationshipIsSet |
-  DynamicFormElementRelationshipIsNotSet;
+  | DynamicFormElementRelationshipEquals
+  | DynamicFormElementRelationshipLessThan
+  | DynamicFormElementRelationshipMoreThan
+  | DynamicFormElementRelationshipIsSet
+  | DynamicFormElementRelationshipIsNotSet;

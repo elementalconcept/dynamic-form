@@ -1,9 +1,9 @@
-import { UntypedFormGroup } from '@angular/forms';
 import { ComponentRef, InjectionToken } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 
+import { DynamicFormComponentMap } from './dynamic-form-component-map.types';
 import { DynamicFormControl } from './dynamic-form-control.types';
 import { DynamicFormElement } from './dynamic-form-element.types';
-import { DynamicFormComponentMap } from './dynamic-form-component-map.types';
 import { DynamicFormValue } from './dynamic-form-value.types';
 
 export interface DynamicForm<M> {

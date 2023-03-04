@@ -48,13 +48,13 @@ export interface DynamicFormValidatorEqualTo {
 }
 
 export type DynamicFormValidator =
-  DynamicFormValidatorMin |
-  DynamicFormValidatorMinLength |
-  DynamicFormValidatorMax |
-  DynamicFormValidatorMaxLength |
-  DynamicFormValidatorRequired |
-  DynamicFormValidatorRequiredTrue |
-  DynamicFormValidatorEmail |
-  DynamicFormValidatorPattern |
-  DynamicFormValidatorPatternList |
-  DynamicFormValidatorEqualTo;
+  | DynamicFormValidatorMin
+  | DynamicFormValidatorMinLength
+  | DynamicFormValidatorMax
+  | DynamicFormValidatorMaxLength
+  | DynamicFormValidatorRequired
+  | DynamicFormValidatorRequiredTrue
+  | DynamicFormValidatorEmail
+  | DynamicFormValidatorPattern
+  | DynamicFormValidatorPatternList
+  | DynamicFormValidatorEqualTo;

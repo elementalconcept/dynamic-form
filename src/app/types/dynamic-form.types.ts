@@ -1,4 +1,4 @@
-import { DynamicFormComponentMap, DynamicFormConfig } from '@elemental-concept/ngx-dynamic-form';
+import { DynamicFormComponentMap, DynamicFormConfig } from '@elemental-concept/dynamic-form';
 
 import { StringInputComponent } from '../components';
 
@@ -8,25 +8,25 @@ export const customConfig: DynamicFormConfig<unknown> = {
       id: 'firstName',
       label: 'First name',
       type: 'string',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'lastName',
       label: 'Last name',
       type: 'string',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'email',
       label: 'E-mail',
       type: 'email',
-      validators: [ { type: 'required' }, { type: 'email' } ]
+      validators: [{ type: 'required' }, { type: 'email' }]
     },
     {
       id: 'password',
       label: 'Password',
       type: 'password',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'misc',

@@ -9,7 +9,7 @@ describe('DynamicFormComponent', () => {
   beforeEach(async () => {
     await TestBed
       .configureTestingModule({
-        declarations: [ DynamicFormComponent ]
+        declarations: [DynamicFormComponent]
       })
       .compileComponents();
   });
@@ -24,49 +24,55 @@ describe('DynamicFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should generate correct configuration on ngInit (null)', fakeAsync(() => {
-    component.ngOnInit();
-    component.config = null;
-    component.value = null;
-    component.componentMap = {};
+  it(
+    'should generate correct configuration on ngInit (null)',
+    fakeAsync(() => {
+      component.ngOnInit();
+      component.config = null;
+      component.value = null;
+      component.componentMap = {};
 
-    tick(250);
+      tick(250);
 
-    expect(component.formReady).toBeFalse();
-    expect(component.formGroup).toBeUndefined();
-  }));
+      expect(component.formReady).toBeFalse();
+      expect(component.formGroup).toBeUndefined();
+    })
+  );
 
-  it('should generate correct configuration on ngInit (something)', fakeAsync(() => {
-    component.config = {
-      elements: [
-        {
-          id: 'title',
-          label: 'Title',
-          type: 'string',
-          validators: [ { type: 'required' } ],
-          errors: { required: 'Title is required' }
-        },
-        {
-          id: 'checkbox',
-          label: 'Title is set. Correct?',
-          type: 'checkbox',
-          dependsOn: [
-            { id: 'title', type: 'set' }
-          ]
-        },
-      ]
-    };
+  it(
+    'should generate correct configuration on ngInit (something)',
+    fakeAsync(() => {
+      component.config = {
+        elements: [
+          {
+            id: 'title',
+            label: 'Title',
+            type: 'string',
+            validators: [{ type: 'required' }],
+            errors: { required: 'Title is required' }
+          },
+          {
+            id: 'checkbox',
+            label: 'Title is set. Correct?',
+            type: 'checkbox',
+            dependsOn: [
+              { id: 'title', type: 'set' }
+            ]
+          }
+        ]
+      };
 
-    component.value = { title: '', checkbox: false };
-    component.componentMap = {};
+      component.value = { title: '', checkbox: false };
+      component.componentMap = {};
 
-    component.ngOnInit();
+      component.ngOnInit();
 
-    tick(250);
+      tick(250);
 
-    expect(component.formReady).toBeTrue();
+      expect(component.formReady).toBeTrue();
 
-    expect(component.formGroup).toBeDefined();
-    expect(component.formGroup.value).toEqual({ title: '', checkbox: false });
-  }));
+      expect(component.formGroup).toBeDefined();
+      expect(component.formGroup.value).toEqual({ title: '', checkbox: false });
+    })
+  );
 });

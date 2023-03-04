@@ -22,9 +22,9 @@ import {
 
 @UntilDestroy()
 @Component({
-  selector: 'ngx-dynamic-form[config][value]',
+  selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: [ './dynamic-form.component.scss' ]
+  styleUrls: ['./dynamic-form.component.scss']
 })
 export class DynamicFormComponent<M> implements OnInit {
   formGroup: UntypedFormGroup;
@@ -45,8 +45,10 @@ export class DynamicFormComponent<M> implements OnInit {
 
   private statusChangesSub: Subscription;
 
-  constructor(private readonly dynamicFormFactory: DynamicFormFactoryService,
-              @Inject(DYNAMIC_FORM_COMPONENT_MAP) componentMap: DynamicFormComponentMap<M>) {
+  constructor(
+    private readonly dynamicFormFactory: DynamicFormFactoryService,
+    @Inject(DYNAMIC_FORM_COMPONENT_MAP) componentMap: DynamicFormComponentMap<M>
+  ) {
     this.componentMap$.next(componentMap);
   }
 
@@ -61,7 +63,7 @@ export class DynamicFormComponent<M> implements OnInit {
   }
 
   @Input()
-  set value(value: { [ key: string ]: any }) {
+  set value(value: { [key: string]: any; }) {
     this.value$.next(value);
   }
 
@@ -70,11 +72,14 @@ export class DynamicFormComponent<M> implements OnInit {
     this.componentMap$.next(componentMap);
   }
 
-  @Output() valueChanges = new EventEmitter<DynamicFormComponentValue>();
+  @Output()
+  valueChanges = new EventEmitter<DynamicFormComponentValue>();
 
-  @Output() statusChanges = new EventEmitter<DynamicFormComponentStatus>();
+  @Output()
+  statusChanges = new EventEmitter<DynamicFormComponentStatus>();
 
-  @Output() formSubmit = new EventEmitter<DynamicFormComponentValue>();
+  @Output()
+  formSubmit = new EventEmitter<DynamicFormComponentValue>();
 
   ngOnInit(): void {
     // Config can be null/undefined, for example, it's being transferred over the wire.
@@ -87,66 +92,73 @@ export class DynamicFormComponent<M> implements OnInit {
     this.config$
       .pipe(
         untilDestroyed(this),
-
-        switchMap(config => combineLatest([ this.value$, this.componentMap$ ])
-          .pipe(map(([ value, componentMap ]) => [ config, value, componentMap ]))),
-
+        switchMap(config =>
+          combineLatest([this.value$, this.componentMap$])
+            .pipe(map(([value, componentMap]) => [config, value, componentMap]))
+        ),
         tap(() => this.valueChangesSub instanceof Object ? this.valueChangesSub.unsubscribe() : noop()),
         tap(() => this.statusChangesSub instanceof Object ? this.statusChangesSub.unsubscribe() : noop()),
-
         // formReady depends on the value of config.
-        tap(([ config ]) => this.formReady = config instanceof Object),
-
+        tap(([config]) => this.formReady = config instanceof Object),
         // No need to create anything if form is not ready.
-        filter(() => this.formReady))
-
+        filter(() => this.formReady)
+      )
       .subscribe(this.createForm);
 
     // If form value was changed programmatically, we reflect such changes here.
     this.value$
       .pipe(
         untilDestroyed(this),
-        filter(() => this.formReady))
+        filter(() => this.formReady)
+      )
       .subscribe(value => this.formGroup.patchValue(value));
 
     // We can only render a form in DOM when we have
     // both DOM node reference (controlled by formReady flag)
     // and dynamicForm (created by dynamicFormFactory in createForm()).
-    combineLatest([ this.dynamicForm$, this.formRef$.pipe(filter(ref => ref !== undefined)) ])
+    combineLatest([this.dynamicForm$, this.formRef$.pipe(filter(ref => ref !== undefined))])
       .pipe(
         untilDestroyed(this),
-        delay(0, asapScheduler))
+        delay(0, asapScheduler)
+      )
       .subscribe(this.renderForm);
   }
 
   onSubmit = () => this.formSubmit.emit({ formGroup: this.formGroup, value: this.formGroup.value });
 
-  private createForm = ([ config, value, componentMap ]: [ DynamicFormConfig<M>, DynamicFormValue, DynamicFormComponentMap<M> ]) => {
+  private createForm = (
+    [config, value, componentMap]: [DynamicFormConfig<M>, DynamicFormValue, DynamicFormComponentMap<M>]
+  ) => {
     const dynamicForm = this.dynamicFormFactory.createForm(config, value, componentMap);
     this.formGroup = dynamicForm.formGroup;
 
     this.statusChangesSub = this.formGroup
       .statusChanges
       .pipe(untilDestroyed(this))
-      .subscribe(s => this.statusChanges.emit({
-        status: s,
-        formGroup: this.formGroup
-      }));
+      .subscribe(s =>
+        this.statusChanges.emit({
+          status: s,
+          formGroup: this.formGroup
+        })
+      );
 
     this.valueChangesSub = this.formGroup
       .valueChanges
       .pipe(
         untilDestroyed(this),
-        tap(this.handleRelationships))
-      .subscribe(v => this.valueChanges.emit({
-        value: v,
-        formGroup: this.formGroup
-      }));
+        tap(this.handleRelationships)
+      )
+      .subscribe(v =>
+        this.valueChanges.emit({
+          value: v,
+          formGroup: this.formGroup
+        })
+      );
 
     this.dynamicForm$.next(dynamicForm);
   };
 
-  private renderForm = ([ dynamicForm, formRef ]: [ DynamicForm<M>, ViewContainerRef ]) => {
+  private renderForm = ([dynamicForm, formRef]: [DynamicForm<M>, ViewContainerRef]) => {
     if (formRef) {
       formRef.clear();
       dynamicForm.components.forEach(item => formRef.insert(item.component.hostView));
@@ -156,19 +168,23 @@ export class DynamicFormComponent<M> implements OnInit {
   handleRelationships = () => {
     this.dynamicForm$
       .pipe(take(1))
-      .subscribe(dynamicForm => dynamicForm.components
-        .filter(item => item.config.dependsOn instanceof Array && item.config.dependsOn.length > 0)
-        .forEach(item => this.isComponentVisible(dynamicForm, item)
-          ? item.component.instance.showControl()
-          : item.component.instance.hideControl()));
+      .subscribe(dynamicForm =>
+        dynamicForm.components
+          .filter(item => item.config.dependsOn instanceof Array && item.config.dependsOn.length > 0)
+          .forEach(item =>
+            this.isComponentVisible(dynamicForm, item)
+              ? item.component.instance.showControl()
+              : item.component.instance.hideControl()
+          )
+      );
   };
 
   private isComponentVisible = (dynamicForm: DynamicForm<M>, item: DynamicFormComponentDescriptor<M>) =>
     item.config.dependsOn.reduce(this.checkDependency(dynamicForm), true);
 
-  private checkDependency = (dynamicForm: DynamicForm<M>) =>
-    (flag: boolean, dependsOn: DynamicFormElementRelationship) => {
-      const parentValue = dynamicForm.formGroup.value[ dependsOn.id ];
+  private checkDependency =
+    (dynamicForm: DynamicForm<M>) => (flag: boolean, dependsOn: DynamicFormElementRelationship) => {
+      const parentValue = dynamicForm.formGroup.value[dependsOn.id];
 
       switch (dependsOn.type) {
         case 'equals':

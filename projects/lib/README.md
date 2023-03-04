@@ -3,27 +3,27 @@
 This library generates Angular `FormGroup` and related DOM from a specified JSON configuration. Such configuration can
 either be baked in into the application or received dynamically from back-end. Exact form input fields are NOT part of
 the library and must be provided by a library user. A set of Material based input components can be found in
-[Material Components For Ngx Dynamic Form](https://github.com/elementalconcept/ngx-dynamic-form-material/)
+[Material Components For Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
 .
-`Ngx Dynamic Form` is only compatible with Angular v11+.
+`Dynamic Form` is only compatible with Angular v11+.
 
 ## Installation
 
 Install the library through NPM:
 
 ```shell
-$ npm i @elemental-concept/ngx-dynamic-form
+$ npm i @elemental-concept/dynamic-form
 ```
 
-`NgxDynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
+`DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
 
 ```typescript
-import { NgxDynamicFormModule } from '@elemental-concept/ngx-dynamic-form';
+import { DynamicFormModule } from '@elemental-concept/dynamic-form';
 
 @NgModule({
   imports: [
-    NgxDynamicFormModule,
+    DynamicFormModule
   ]
 })
 class SomeModule {
@@ -55,7 +55,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-form',
   templateUrl: './my-form.component.html',
-  styleUrls: [ './my-form.component.scss' ]
+  styleUrls: ['./my-form.component.scss']
 })
 export class MyFormComponent {
   config = {
@@ -64,13 +64,13 @@ export class MyFormComponent {
         id: 'firstName',
         label: 'First name',
         type: 'string',
-        validators: [ { type: 'required' } ]
+        validators: [{ type: 'required' }]
       },
       {
         id: 'lastName',
         label: 'Last name',
         type: 'string',
-        validators: [ { type: 'required' } ]
+        validators: [{ type: 'required' }]
       }
     ]
   };
@@ -87,10 +87,10 @@ export class MyFormComponent {
 `DynamicFormComponent` has 4 content slots which can be used to annotate and decorate the form according to the design.
 One of these slots should also contain submit button if required. Slots are specified by CSS classes:
 
-* `before-form` - content will be placed befor `<form>` tag.
-* `form-header` - content will be placed at the start of `<form>` tag.
-* `form-footer` - content will be placed at the end of `<form>` tag.
-* `after-form` - content will be placed after `<form>` tag.
+- `before-form` - content will be placed befor `<form>` tag.
+- `form-header` - content will be placed at the start of `<form>` tag.
+- `form-footer` - content will be placed at the end of `<form>` tag.
+- `after-form` - content will be placed after `<form>` tag.
 
 ```angular2html
 <!-- my-form.component.html -->
@@ -145,7 +145,7 @@ Required. Value of the form. Can be an empty object `{}`.
 `@Input componentMap: DynamicFormComponentMap<M>`
 
 Mapping between textual input types like `string` and `checkbox` to actual Angular components. This mapping should be
-provided either by component library like *Material Components For Dynamic Form* or by the app developer manually.
+provided either by component library like _Material Components For Dynamic Form_ or by the app developer manually.
 Check `DynamicFormComponentMap` section for more info.
 
 `@Output valueChanges: EventEmitter<DynamicFormComponentValue>`
@@ -190,41 +190,42 @@ interface DynamicFormElement<M> {
 
 Required attributes:
 
-* `id` - unique ID of a form field, for example, `password` or `email`.
-* `label` - label to show next to the form field. Exact location and presentation of the label will depend on form
+- `id` - unique ID of a form field, for example, `password` or `email`.
+- `label` - label to show next to the form field. Exact location and presentation of the label will depend on form
   component library.
-* `type` - type of form field. Types depend on a form component library. `Dynamic Form` does not care about types at all
+- `type` - type of form field. Types depend on a form component library. `Dynamic Form` does not care about types at all
   as it does not render the final HTML into the view.
 
 Optional attributes:
 
-* `placeholder` - can be used by a component library to display a placeholder when form field value is empty.
-* `meta` - a set of meta attributes which are passed directly to a component library without any modifications. Meta
+- `placeholder` - can be used by a component library to display a placeholder when form field value is empty.
+- `meta` - a set of meta attributes which are passed directly to a component library without any modifications. Meta
   handling is completely dependent on a component library.
-* `options` - list of possible values for a form field. Behaviour depends on a component library.
-* `dependsOn` - list of dependencies which control when form field will be visible. For example, a text input field
+- `options` - list of possible values for a form field. Behaviour depends on a component library.
+- `dependsOn` - list of dependencies which control when form field will be visible. For example, a text input field
   might only appear when a check box is selected. `dependsOn` allows you to express such behaviour.
-* `validators` - a set of Angular form validators to be applied to a form field.
-* `errors` - a set of error messages to show when validations fail.
+- `validators` - a set of Angular form validators to be applied to a form field.
+- `errors` - a set of error messages to show when validations fail.
 
 Example:
 
 ```typescript
 {
-  elements: [
+  elements:
+  [
     {
       id: 'firstName',
       label: 'First name',
       type: 'string',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'lastName',
       label: 'Last name',
       type: 'string',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     }
-  ]
+  ];
 }
 ```
 
@@ -237,25 +238,26 @@ interface DynamicFormElementOption {
 }
 ```
 
-* `label` - label of an option visible to the end user.
-* `value` - value of an option which will be assigned to the form field when a user selects it.
+- `label` - label of an option visible to the end user.
+- `value` - value of an option which will be assigned to the form field when a user selects it.
 
 ### DynamicFormElementRelationship
 
 `Dynamic Form` allows specifying basic relationships between form fields. All relationships in a set are merged
 with `AND` logical operation. Five operations are available:
 
-* `equals`
-* `lessThan`
-* `moreThan`
-* `set`
-* `notSet`
+- `equals`
+- `lessThan`
+- `moreThan`
+- `set`
+- `notSet`
 
 Example
 
 ```typescript
 {
-  elements: [
+  elements:
+  [
     {
       id: 'subscribe',
       label: 'Do you wish to subscribe to our newsletter?',
@@ -265,10 +267,10 @@ Example
       id: 'email',
       label: 'Your e-mail for newsletter subscription',
       type: 'email',
-      validators: [ { type: 'email' } ],
-      dependsOn: [ { id: 'subscribe', type: 'set' } ]
+      validators: [{ type: 'email' }],
+      dependsOn: [{ id: 'subscribe', type: 'set' }]
     }
-  ]
+  ];
 }
 ```
 
@@ -305,11 +307,11 @@ interface DynamicFormElementRelationshipIsNotSet extends DynamicFormElementRelat
 }
 
 type DynamicFormElementRelationship =
-  DynamicFormElementRelationshipEquals |
-  DynamicFormElementRelationshipLessThan |
-  DynamicFormElementRelationshipMoreThan |
-  DynamicFormElementRelationshipIsSet |
-  DynamicFormElementRelationshipIsNotSet;
+  | DynamicFormElementRelationshipEquals
+  | DynamicFormElementRelationshipLessThan
+  | DynamicFormElementRelationshipMoreThan
+  | DynamicFormElementRelationshipIsSet
+  | DynamicFormElementRelationshipIsNotSet;
 ```
 
 ### DynamicFormValidator
@@ -321,14 +323,15 @@ Example:
 
 ```typescript
 {
-  elements: [
+  elements:
+  [
     {
       id: 'email',
       label: 'E-mail',
       type: 'email',
-      validators: [ { type: 'required' }, { type: 'email' } ]
+      validators: [{ type: 'required' }, { type: 'email' }]
     }
-  ]
+  ];
 }
 ```
 
@@ -336,7 +339,7 @@ This is equal to:
 
 ```typescript
 new FormGroup({
-  email: new FormControl('', [ Validators.required, Validators.email ])
+  email: new FormControl('', [Validators.required, Validators.email])
 });
 ```
 
@@ -386,20 +389,20 @@ export interface DynamicFormValidatorEqualTo {
 }
 
 type DynamicFormValidator =
-  DynamicFormValidatorMin |
-  DynamicFormValidatorMax |
-  DynamicFormValidatorRequired |
-  DynamicFormValidatorRequiredTrue |
-  DynamicFormValidatorEmail |
-  DynamicFormValidatorPattern |
-  DynamicFormValidatorEqualTo;
+  | DynamicFormValidatorMin
+  | DynamicFormValidatorMax
+  | DynamicFormValidatorRequired
+  | DynamicFormValidatorRequiredTrue
+  | DynamicFormValidatorEmail
+  | DynamicFormValidatorPattern
+  | DynamicFormValidatorEqualTo;
 ```
 
 ### DynamicFormErrors
 
 ```typescript
 interface DynamicFormErrors {
-  [ key: string ]: string;
+  [key: string]: string;
 }
 ```
 
@@ -408,4 +411,4 @@ A simple key-value map between error codes and their messages.
 ## Creating Custom Input Components
 
 This section is not finished yet. Please check the source code in the sample app on how it's done as well as
-*Material Components For Dynamic Form* mentioned earlier.
+_Material Components For Dynamic Form_ mentioned earlier.

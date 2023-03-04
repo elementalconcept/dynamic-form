@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TranslationFilterService } from './translation-filter.service';
 import { TranslateService } from '@ngx-translate/core';
 import { of } from 'rxjs';
+import { TranslationFilterService } from './translation-filter.service';
 
 describe('TranslationFilterService', () => {
   let service: TranslationFilterService;
@@ -11,7 +11,7 @@ describe('TranslationFilterService', () => {
 
   beforeEach(() => {
     translateService = {
-      stream: of([ 'test' ])
+      stream: of(['test'])
     };
 
     TestBed.configureTestingModule({

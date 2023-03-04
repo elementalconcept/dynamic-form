@@ -3,7 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@elemental-concept/ngx-dynamic-form": [
+      "@elemental-concept/dynamic-form": [
         "dist/lib"
       ]
     },
