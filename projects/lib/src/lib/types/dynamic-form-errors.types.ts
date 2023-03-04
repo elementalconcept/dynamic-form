@@ -1,3 +1,3 @@
 export interface DynamicFormErrors {
-  [ key: string ]: string;
+  [key: string]: string;
 }

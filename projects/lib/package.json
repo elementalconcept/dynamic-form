@@ -1,10 +1,10 @@
 {
-  "name": "@elemental-concept/ngx-dynamic-form",
+  "name": "@elemental-concept/dynamic-form",
   "version": "1.0.0",
   "description": "This library generates Angular `FormGroup` and related DOM from a specified JSON configuration.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/elementalconcept/ngx-dynamic-form.git"
+    "url": "git+https://github.com/elementalconcept/dynamic-form.git"
   },
   "keywords": [
     "form",
@@ -14,9 +14,9 @@
   "author": "Elemental Concept",
   "license": "BSD-2-Clause",
   "bugs": {
-    "url": "https://github.com/elementalconcept/ngx-dynamic-form/issues"
+    "url": "https://github.com/elementalconcept/dynamic-form/issues"
   },
-  "homepage": "https://github.com/elementalconcept/ngx-dynamic-form#readme",
+  "homepage": "https://github.com/elementalconcept/dynamic-form#readme",
   "peerDependencies": {
     "@angular/common": "^15.0.0",
     "@angular/core": "^15.0.0",

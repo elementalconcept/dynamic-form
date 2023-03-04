@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-dynamic-form": {
+    "dynamic-form": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngx-dynamic-form",
+            "outputPath": "dist/dynamic-form",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ngx-dynamic-form:build:production"
+              "browserTarget": "dynamic-form:build:production"
             },
             "development": {
-              "browserTarget": "ngx-dynamic-form:build:development"
+              "browserTarget": "dynamic-form:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngx-dynamic-form:build"
+            "browserTarget": "dynamic-form:build"
           }
         },
         "test": {
