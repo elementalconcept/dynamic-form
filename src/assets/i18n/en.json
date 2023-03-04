@@ -1,0 +1,32 @@
+{
+  "input": {
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "back": "back",
+    "next": "next",
+    "close": "close",
+    "complete": "complete",
+    "reset": "reset",
+    "delete": "delete",
+    "save": "save"
+  },
+  "module": {
+    "auth": {
+      "login": {
+        "page": {
+          "title": "Dynamic Form"
+        },
+        "form": {
+          "title": "Login",
+          "config": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "email": "Email",
+            "password": "Password",
+            "misc": "Misc"
+          }
+        }
+      }
+    }
+  }
+}

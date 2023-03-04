@@ -2,46 +2,57 @@ import { DynamicFormComponentMap, DynamicFormConfig } from '@elemental-concept/d
 
 import { StringInputComponent } from '../components';
 
-export const customConfig: DynamicFormConfig<unknown> = {
+export interface FormValue {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  misc: string;
+}
+
+export const customConfig: DynamicFormConfig<FormValue> = {
   elements: [
     {
       id: 'firstName',
-      label: 'First name',
+      label: 'module.auth.login.form.config.firstName',
       type: 'string',
       validators: [{ type: 'required' }]
     },
     {
       id: 'lastName',
-      label: 'Last name',
+      label: 'module.auth.login.form.config.lastName',
       type: 'string',
       validators: [{ type: 'required' }]
     },
     {
       id: 'email',
-      label: 'E-mail',
+      label: 'module.auth.login.form.config.email',
       type: 'email',
       validators: [{ type: 'required' }, { type: 'email' }]
     },
     {
       id: 'password',
-      label: 'Password',
+      label: 'module.auth.login.form.config.password',
       type: 'password',
       validators: [{ type: 'required' }]
     },
     {
       id: 'misc',
-      label: 'Misc',
+      label: 'module.auth.login.form.config.misc',
       type: 'string',
       dependsOn: [
-        { id: 'firstName', type: 'equals', value: 'Aux' }
+        { id: 'firstName', type: 'equals', value: 'test' }
       ]
     }
   ]
 };
 
-export const customValue = {
+export const customValue: FormValue = {
   firstName: 'Me',
-  lastName: 'Myself'
+  lastName: 'Myself',
+  email: null,
+  password: null,
+  misc: null
 };
 
 export const customComponentMap: DynamicFormComponentMap<unknown> = {
