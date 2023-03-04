@@ -1,5 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { DynamicFormValidatorPattern } from '../../types/dynamic-form-validator.types';
+
+import { DynamicFormValidatorPattern } from '../../types';
 
 // @dynamic
 export class DynamicFormValidators {
@@ -38,7 +39,7 @@ export function patternListValidator(patterns: DynamicFormValidatorPattern[]): V
       const regex = new RegExp(pattern.pattern);
       const valid = regex.test(control.value);
 
-      if (!valid && pattern.errorLabel !== undefined) {
+      if (!valid) {
         acc[pattern.errorLabel] = true;
       }
 
