@@ -3,9 +3,9 @@
 This library generates Angular `FormGroup` and related DOM from a specified JSON configuration. Such configuration can
 either be baked in into the application or received dynamically from back-end. Exact form input fields are NOT part of
 the library and must be provided by a library user. A set of Material based input components can be found in
-[Material Components For Ngx Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
+[Material Components For Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
 .
-`Ngx Dynamic Form` is only compatible with Angular v11+.
+`Dynamic Form` is only compatible with Angular v11+.
 
 ## Installation
 
@@ -15,15 +15,15 @@ Install the library through NPM:
 $ npm i @elemental-concept/dynamic-form
 ```
 
-`NgxDynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
+`DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
 
 ```typescript
-import { NgxDynamicFormModule } from '@elemental-concept/dynamic-form';
+import { DynamicFormModule } from '@elemental-concept/dynamic-form';
 
 @NgModule({
   imports: [
-    NgxDynamicFormModule
+    DynamicFormModule
   ]
 })
 class SomeModule {
