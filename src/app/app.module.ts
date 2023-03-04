@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 
 import { StringInputComponent } from './components';
 
-export function httpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
@@ -33,10 +33,11 @@ export function httpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CommonModule,
 
     TranslateModule.forRoot({
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
-        deps: [HttpClient],
-        useFactory: httpLoaderFactory
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
 
