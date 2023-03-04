@@ -5,13 +5,13 @@
 <h3>Dynamic Form plain html components</h3>
 
 <div class="wrapper">
-  <ngx-dynamic-form [config]="customConfig"
-                    [value]="customValue"
-                    [componentMap]="customComponentMap"
-                    (statusChanges)="onCustomVStatusChanges($event)"
-                    (valueChanges)="onCustomValueChanges($event)"
-                    class="simple-form">
-  </ngx-dynamic-form>
+  <dynamic-form [config]="customConfig"
+                [value]="customValue"
+                [componentMap]="customComponentMap"
+                (statusChanges)="onCustomVStatusChanges($event)"
+                (valueChanges)="onCustomValueChanges($event)"
+                class="simple-form">
+  </dynamic-form>
 
   <div class="results">
     <p>Result</p>

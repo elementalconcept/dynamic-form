@@ -27,6 +27,6 @@ export interface DynamicFormDescriptionControl<M> extends DynamicFormControlComm
 }
 
 export type DynamicFormControl<M> =
-  DynamicFormControlCVA<M> |
-  DynamicFormPassThroughControl<M> |
-  DynamicFormDescriptionControl<M>;
+  | DynamicFormControlCVA<M>
+  | DynamicFormPassThroughControl<M>
+  | DynamicFormDescriptionControl<M>;
