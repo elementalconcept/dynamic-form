@@ -176,9 +176,10 @@ interface DynamicFormConfig<M> {
 
 interface DynamicFormElement<M> {
   id: string;
-  label: string;
   type: '_description_' | string;
 
+  disabled?: boolean;
+  label?: string;
   placeholder?: string;
   meta?: M;
   options?: DynamicFormElementOption[];
@@ -191,13 +192,14 @@ interface DynamicFormElement<M> {
 Required attributes:
 
 - `id` - unique ID of a form field, for example, `password` or `email`.
-- `label` - label to show next to the form field. Exact location and presentation of the label will depend on form
   component library.
 - `type` - type of form field. Types depend on a form component library. `Dynamic Form` does not care about types at all
   as it does not render the final HTML into the view.
 
 Optional attributes:
 
+- `disabled` - change the status of the form element to be readonly or editable
+- `label` - label to show next to the form field. Exact location and presentation of the label will depend on form
 - `placeholder` - can be used by a component library to display a placeholder when form field value is empty.
 - `meta` - a set of meta attributes which are passed directly to a component library without any modifications. Meta
   handling is completely dependent on a component library.
@@ -212,20 +214,20 @@ Example:
 ```typescript
 {
   elements:
-  [
-    {
-      id: 'firstName',
-      label: 'First name',
-      type: 'string',
-      validators: [{ type: 'required' }]
-    },
-    {
-      id: 'lastName',
-      label: 'Last name',
-      type: 'string',
-      validators: [{ type: 'required' }]
-    }
-  ];
+    [
+      {
+        id: 'firstName',
+        label: 'First name',
+        type: 'string',
+        validators: [{ type: 'required' }]
+      },
+      {
+        id: 'lastName',
+        label: 'Last name',
+        type: 'string',
+        validators: [{ type: 'required' }]
+      }
+    ];
 }
 ```
 
@@ -257,20 +259,20 @@ Example
 ```typescript
 {
   elements:
-  [
-    {
-      id: 'subscribe',
-      label: 'Do you wish to subscribe to our newsletter?',
-      type: 'checkbox'
-    },
-    {
-      id: 'email',
-      label: 'Your e-mail for newsletter subscription',
-      type: 'email',
-      validators: [{ type: 'email' }],
-      dependsOn: [{ id: 'subscribe', type: 'set' }]
-    }
-  ];
+    [
+      {
+        id: 'subscribe',
+        label: 'Do you wish to subscribe to our newsletter?',
+        type: 'checkbox'
+      },
+      {
+        id: 'email',
+        label: 'Your e-mail for newsletter subscription',
+        type: 'email',
+        validators: [{ type: 'email' }],
+        dependsOn: [{ id: 'subscribe', type: 'set' }]
+      }
+    ];
 }
 ```
 
@@ -324,14 +326,14 @@ Example:
 ```typescript
 {
   elements:
-  [
-    {
-      id: 'email',
-      label: 'E-mail',
-      type: 'email',
-      validators: [{ type: 'required' }, { type: 'email' }]
-    }
-  ];
+    [
+      {
+        id: 'email',
+        label: 'E-mail',
+        type: 'email',
+        validators: [{ type: 'required' }, { type: 'email' }]
+      }
+    ];
 }
 ```
 

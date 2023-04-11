@@ -7,6 +7,7 @@ export interface DynamicFormElement<M> {
   id: string;
   type: '_description_' | string;
 
+  disabled?: boolean;
   label?: string;
   placeholder?: string;
   meta?: M;

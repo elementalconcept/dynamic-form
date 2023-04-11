@@ -75,7 +75,7 @@ export class DynamicFormFactoryService {
         .filter(validator => validator !== null)
       : [];
 
-    formGroup.addControl(element.id, this.createFormControl(value[element.id], validators));
+    formGroup.addControl(element.id, this.createFormControl(value[element.id], validators, element.disabled));
   };
 
   getValidator = (validator: DynamicFormValidator): ValidatorFn | null => {
@@ -115,5 +115,6 @@ export class DynamicFormFactoryService {
     }
   };
 
-  createFormControl = (value: any, validators: ValidatorFn[]): FormControl => new FormControl(value, validators);
+  createFormControl = (value: any, validators: ValidatorFn[], disabled: boolean): FormControl =>
+    new FormControl({ value, disabled }, validators);
 }
