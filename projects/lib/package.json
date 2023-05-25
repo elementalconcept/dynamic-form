@@ -21,7 +21,7 @@
     "@angular/common": ">= 9 < 17",
     "@angular/core": ">= 9 < 17",
     "@ngneat/until-destroy": "^9.2.3",
-    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^7.0.0"
   },
   "dependencies": {
