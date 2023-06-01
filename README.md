@@ -5,7 +5,7 @@ either be baked in into the application or received dynamically from back-end. E
 the library and must be provided by a library user. A set of Material based input components can be found in
 [Material Components For Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
 .
-`Dynamic Form` is only compatible with Angular v11+.
+`Dynamic Form 1.x` is only compatible with Angular v13 v14 and v15.
 
 ## Installation
 
@@ -214,20 +214,20 @@ Example:
 ```typescript
 {
   elements:
-    [
-      {
-        id: 'firstName',
-        label: 'First name',
-        type: 'string',
-        validators: [{ type: 'required' }]
-      },
-      {
-        id: 'lastName',
-        label: 'Last name',
-        type: 'string',
-        validators: [{ type: 'required' }]
-      }
-    ];
+  [
+    {
+      id: 'firstName',
+      label: 'First name',
+      type: 'string',
+      validators: [{ type: 'required' }]
+    },
+    {
+      id: 'lastName',
+      label: 'Last name',
+      type: 'string',
+      validators: [{ type: 'required' }]
+    }
+  ];
 }
 ```
 
@@ -259,20 +259,20 @@ Example
 ```typescript
 {
   elements:
-    [
-      {
-        id: 'subscribe',
-        label: 'Do you wish to subscribe to our newsletter?',
-        type: 'checkbox'
-      },
-      {
-        id: 'email',
-        label: 'Your e-mail for newsletter subscription',
-        type: 'email',
-        validators: [{ type: 'email' }],
-        dependsOn: [{ id: 'subscribe', type: 'set' }]
-      }
-    ];
+  [
+    {
+      id: 'subscribe',
+      label: 'Do you wish to subscribe to our newsletter?',
+      type: 'checkbox'
+    },
+    {
+      id: 'email',
+      label: 'Your e-mail for newsletter subscription',
+      type: 'email',
+      validators: [{ type: 'email' }],
+      dependsOn: [{ id: 'subscribe', type: 'set' }]
+    }
+  ];
 }
 ```
 
