@@ -5,7 +5,7 @@ either be baked in into the application or received dynamically from back-end. E
 the library and must be provided by a library user. A set of Material based input components can be found in
 [Material Components For Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
 .
-`Dynamic Form ^1.0.0` is only compatible with Angular v13 v14 and v15.
+`Dynamic Form 1.x` is only compatible with Angular v13 v14 and v15.
 
 ## Installation
 
