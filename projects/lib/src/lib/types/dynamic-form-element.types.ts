@@ -10,6 +10,7 @@ export interface DynamicFormElement<M> {
   disabled?: boolean;
   label?: string;
   placeholder?: string;
+  updateOn?: 'change' | 'blur' | 'submit';
   meta?: M;
   options?: DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];

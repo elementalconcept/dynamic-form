@@ -42,6 +42,6 @@ describe('DynamicFormFactoryService', () => {
   });
 
   it('should return FormControl instance', () => {
-    expect(service.createFormControl('', [])).toBeInstanceOf(UntypedFormControl);
+    expect(service.createFormControl('', [], false)).toBeInstanceOf(UntypedFormControl);
   });
 });
