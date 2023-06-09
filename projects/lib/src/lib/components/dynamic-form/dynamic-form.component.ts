@@ -122,6 +122,7 @@ export class DynamicFormComponent<M> implements OnInit {
         delay(0, asapScheduler)
       )
       .subscribe(this.renderForm);
+
   }
 
   onSubmit = () => this.formSubmit.emit({ formGroup: this.formGroup, value: this.formGroup.value });
