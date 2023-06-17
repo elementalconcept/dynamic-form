@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { AbstractControl, FormGroup, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
-
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { DynamicFormFactoryService } from '../../services';
 
@@ -193,7 +193,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   private checkDependency =
     (dynamicForm: DynamicForm<M, V>) => (flag: boolean, dependsOn: DynamicFormElementRelationship) => {
-      const parentValue = dynamicForm.formGroup.value[ dependsOn.id ];
+      const parentValue = dynamicForm.formGroup.value[dependsOn.id];
 
       switch (dependsOn.type) {
         case 'equals':
