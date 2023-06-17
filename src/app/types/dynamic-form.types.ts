@@ -50,9 +50,9 @@ export const customConfig: DynamicFormConfig<FormValue> = {
 export const customValue: FormValue = {
   firstName: 'Me',
   lastName: 'Myself',
-  email: null,
-  password: null,
-  misc: null
+  email: '',
+  password: '',
+  misc: ''
 };
 
 export const customComponentMap: DynamicFormComponentMap<unknown> = {

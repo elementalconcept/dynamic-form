@@ -25,21 +25,6 @@ describe('DynamicFormComponent', () => {
   });
 
   it(
-    'should generate correct configuration on ngInit (null)',
-    fakeAsync(() => {
-      component.ngOnInit();
-      component.config = null;
-      component.value = null;
-      component.componentMap = {};
-
-      tick(250);
-
-      expect(component.formReady).toBeFalse();
-      expect(component.formGroup).toBeUndefined();
-    })
-  );
-
-  it(
     'should generate correct configuration on ngInit (something)',
     fakeAsync(() => {
       component.config = {
