@@ -11,7 +11,8 @@
     "format": "dprint fmt",
     "format:check": "dprint check",
     "test": "ng test lib --no-watch --browsers ChromeHeadless",
-    "test:watch": "ng test lib --browsers ChromeHeadless"
+    "test:watch": "ng test lib --browsers ChromeHeadless",
+    "prepare": "husky install"
   },
   "private": false,
   "dependencies": {
@@ -38,6 +39,7 @@
     "@angular/compiler-cli": "^16.1.0",
     "@types/jasmine": "~4.3.0",
     "dprint": "^0.37.1",
+    "husky": "^8.0.3",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
