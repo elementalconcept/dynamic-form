@@ -45,7 +45,7 @@ Additionally, custom HTML can be placed inside the form if needed.
 
 ```angular2html
 <!-- my-form.component.html -->
-<ecdf-dynamic-form [config]="config" [value]="value"></ecdf-dynamic-form>
+<dynamic-form [config]="config" [value]="value"></dynamic-form>
 ```
 
 ```typescript
