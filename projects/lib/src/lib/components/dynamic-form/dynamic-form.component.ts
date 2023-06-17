@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { AbstractControl, FormGroup, UntypedFormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 
 import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
@@ -23,7 +25,13 @@ import {
 @Component({
   selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: [ './dynamic-form.component.scss' ]
+  styleUrls: [ './dynamic-form.component.scss' ],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ]
 })
 export class DynamicFormComponent<M, V> implements OnInit {
   formGroup: FormGroup<Record<keyof V, AbstractControl>>;
@@ -185,7 +193,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   private checkDependency =
     (dynamicForm: DynamicForm<M, V>) => (flag: boolean, dependsOn: DynamicFormElementRelationship) => {
-      const parentValue = dynamicForm.formGroup.value[dependsOn.id];
+      const parentValue = dynamicForm.formGroup.value[ dependsOn.id ];
 
       switch (dependsOn.type) {
         case 'equals':
