@@ -15,6 +15,13 @@ Install the library through NPM:
 $ npm i @elemental-concept/dynamic-form
 ```
 
+Choose the version corresponding to your Angular version:
+
+| Angular        | @elemental-concept/dynamic-form |
+|----------------|---------------------------------|
+| 16+            | 16.x+                           |
+| 13+ (ivy only) | 1.x+                            |
+
 `DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
 
