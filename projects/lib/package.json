@@ -20,9 +20,7 @@
   "peerDependencies": {
     "@angular/common": "^16",
     "@angular/core": "^16",
-    "@ngneat/until-destroy": "^9.2.3",
-    "@ngx-translate/core": "^15",
-    "@ngx-translate/http-loader": "^8"
+    "@ngneat/until-destroy": "^9.2.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"
