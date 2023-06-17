@@ -19,7 +19,7 @@ Choose the version corresponding to your Angular version:
 
 | Angular        | @elemental-concept/dynamic-form |
 |----------------|---------------------------------|
-| 16+            | 16.x+                           |
+| 16             | 16.x                            |
 | 13+ (ivy only) | 1.x+                            |
 
 `DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
