@@ -21,7 +21,9 @@ export class TranslationFilterService {
   private collectKeys = <M>(config: DynamicFormConfig<M>): string[] =>
     config.elements.reduce(
       (acc, element) => {
-        acc.push(element.label);
+        if (element.label != null) {
+          acc.push(element.label);
+        }
 
         if (typeof element.placeholder === 'string') {
           acc.push(element.placeholder);
@@ -32,7 +34,7 @@ export class TranslationFilterService {
         }
 
         if (element.errors instanceof Object) {
-          Object.keys(element.errors).forEach(key => acc.push(element.errors[key]));
+          Object.keys(element.errors).forEach(key => acc.push(element.errors![key]));
         }
 
         // this is used for the checkbox input with external link (example: accept Terms and Conditions)
@@ -45,7 +47,7 @@ export class TranslationFilterService {
 
         return acc;
       },
-      []
+      [] as string[]
     );
 
   private updateTranslations = <M>(
@@ -58,7 +60,7 @@ export class TranslationFilterService {
       elements: config.elements.map(element => {
         const result: DynamicFormElement<M> = {
           ...element,
-          label: translations[element.label]
+          label: translations[element.label!]
         };
 
         if (typeof element.placeholder === 'string') {
@@ -74,7 +76,7 @@ export class TranslationFilterService {
             .reduce(
               (acc, key) => ({
                 ...acc,
-                [key]: translations[element.errors[key]]
+                [key]: translations[element.errors![key]]
               }),
               {}
             );
