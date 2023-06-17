@@ -6,13 +6,13 @@ const simpleForm: DynamicFormConfig<void> = {
       id: 'firstName',
       label: 'First name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'lastName',
       label: 'Last name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     }
   ]
 };
@@ -23,13 +23,13 @@ const loginForm: DynamicFormConfig<void> = {
       id: 'email',
       label: 'E-mail',
       type: 'string',
-      validators: [{ type: 'required' }, { type: 'email' }]
+      validators: [ { type: 'required' }, { type: 'email' } ]
     },
     {
       id: 'password',
       label: 'Password',
       type: 'password',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'remember',
@@ -45,7 +45,7 @@ const eventForm: DynamicFormConfig<string> = {
       id: 'name',
       label: 'Event name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'location',
@@ -57,7 +57,7 @@ const eventForm: DynamicFormConfig<string> = {
       id: 'date',
       label: 'Event date',
       type: 'date',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'allDay',

@@ -16,25 +16,25 @@ export const customConfig: DynamicFormConfig<FormValue> = {
       id: 'firstName',
       label: 'module.auth.login.form.config.firstName',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'lastName',
       label: 'module.auth.login.form.config.lastName',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'email',
       label: 'module.auth.login.form.config.email',
       type: 'email',
-      validators: [{ type: 'required' }, { type: 'email' }]
+      validators: [ { type: 'required' }, { type: 'email' } ]
     },
     {
       id: 'password',
       label: 'module.auth.login.form.config.password',
       type: 'password',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'misc',
@@ -50,9 +50,9 @@ export const customConfig: DynamicFormConfig<FormValue> = {
 export const customValue: FormValue = {
   firstName: 'Me',
   lastName: 'Myself',
-  email: null,
-  password: null,
-  misc: null
+  email: '',
+  password: '',
+  misc: ''
 };
 
 export const customComponentMap: DynamicFormComponentMap<unknown> = {

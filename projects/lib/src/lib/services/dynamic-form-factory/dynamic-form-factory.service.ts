@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, Injector } from '@angular/core';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 import {
   DynamicForm,
@@ -8,8 +8,7 @@ import {
   DynamicFormConfig,
   DynamicFormControl,
   DynamicFormElement,
-  DynamicFormValidator,
-  DynamicFormValue
+  DynamicFormValidator
 } from '../../types';
 
 import { DynamicFormValidators } from './dynamic-form-validators';
@@ -22,18 +21,19 @@ export class DynamicFormFactoryService {
   ) {
   }
 
-  createForm = <M>(
+  createForm = <M, V>(
     config: DynamicFormConfig<M>,
-    value: DynamicFormValue,
+    value: V,
     componentMap: DynamicFormComponentMap<M>
-  ): DynamicForm<M> => {
-    const formGroup = new FormGroup({});
+  ): DynamicForm<M, V> => {
+    // @ts-ignore
+    const formGroup = new FormGroup<Record<keyof V, AbstractControl>>({});
 
     config.elements.forEach(this.insertFormControl(value, formGroup));
 
     const components = config.elements
       .map(this.mapFormComponent(componentMap, formGroup))
-      .filter(ref => ref !== null);
+      .filter(ref => ref !== null) as DynamicFormComponentDescriptor<M>[];
 
     return {
       formGroup,
@@ -64,7 +64,7 @@ export class DynamicFormFactoryService {
       return null;
     };
 
-  insertFormControl = (value: DynamicFormValue, formGroup: FormGroup) => <M>(element: DynamicFormElement<M>) => {
+  insertFormControl = <V>(value: V, formGroup: FormGroup) => <M>(element: DynamicFormElement<M>) => {
     if (element.type === '_description_') {
       return;
     }
@@ -72,10 +72,13 @@ export class DynamicFormFactoryService {
     const validators: ValidatorFn[] = element.validators instanceof Array
       ? element.validators
         .map(this.getValidator)
-        .filter(validator => validator !== null)
+        .filter(validator => validator !== null) as ValidatorFn[]
       : [];
 
-    formGroup.addControl(element.id, this.createFormControl(value[element.id], validators, element.disabled, element.updateOn));
+    formGroup.addControl(
+      element.id,
+      this.createFormControl(value[element.id], validators, element.disabled === true, element.updateOn)
+    );
   };
 
   getValidator = (validator: DynamicFormValidator): ValidatorFn | null => {
@@ -115,9 +118,10 @@ export class DynamicFormFactoryService {
     }
   };
 
-  createFormControl = (value: any,
-                       validators: ValidatorFn[],
-                       disabled: boolean,
-                       updateOn: 'change' | 'blur' | 'submit' = 'change'): FormControl =>
-    new FormControl({ value, disabled }, { updateOn, validators });
+  createFormControl = (
+    value: any,
+    validators: ValidatorFn[],
+    disabled: boolean,
+    updateOn: 'change' | 'blur' | 'submit' = 'change'
+  ): FormControl => new FormControl({ value, disabled }, { updateOn, validators });
 }

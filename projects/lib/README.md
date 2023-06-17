@@ -55,7 +55,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-form',
   templateUrl: './my-form.component.html',
-  styleUrls: ['./my-form.component.scss']
+  styleUrls: [ './my-form.component.scss' ]
 })
 export class MyFormComponent {
   config = {
@@ -64,13 +64,13 @@ export class MyFormComponent {
         id: 'firstName',
         label: 'First name',
         type: 'string',
-        validators: [{ type: 'required' }]
+        validators: [ { type: 'required' } ]
       },
       {
         id: 'lastName',
         label: 'Last name',
         type: 'string',
-        validators: [{ type: 'required' }]
+        validators: [ { type: 'required' } ]
       }
     ]
   };
@@ -219,13 +219,13 @@ Example:
       id: 'firstName',
       label: 'First name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'lastName',
       label: 'Last name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     }
   ];
 }
@@ -269,8 +269,8 @@ Example
       id: 'email',
       label: 'Your e-mail for newsletter subscription',
       type: 'email',
-      validators: [{ type: 'email' }],
-      dependsOn: [{ id: 'subscribe', type: 'set' }]
+      validators: [ { type: 'email' } ],
+      dependsOn: [ { id: 'subscribe', type: 'set' } ]
     }
   ];
 }
@@ -326,14 +326,14 @@ Example:
 ```typescript
 {
   elements:
-    [
-      {
-        id: 'email',
-        label: 'E-mail',
-        type: 'email',
-        validators: [{ type: 'required' }, { type: 'email' }]
-      }
-    ];
+  [
+    {
+      id: 'email',
+      label: 'E-mail',
+      type: 'email',
+      validators: [ { type: 'required' }, { type: 'email' } ]
+    }
+  ];
 }
 ```
 
@@ -341,7 +341,7 @@ This is equal to:
 
 ```typescript
 new FormGroup({
-  email: new FormControl('', [Validators.required, Validators.email])
+  email: new FormControl('', [ Validators.required, Validators.email ])
 });
 ```
 

@@ -5,7 +5,7 @@
 <h3>Dynamic Form plain html components</h3>
 
 <div class="wrapper">
-  <dynamic-form [config]="customConfig$ | async"
+  <dynamic-form [config]="customConfig"
                 [value]="customValue"
                 [componentMap]="customComponentMap"
                 (statusChanges)="onCustomVStatusChanges($event)"

@@ -3,13 +3,13 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { DynamicFormComponent } from './dynamic-form.component';
 
 describe('DynamicFormComponent', () => {
-  let component: DynamicFormComponent<unknown>;
-  let fixture: ComponentFixture<DynamicFormComponent<unknown>>;
+  let component: DynamicFormComponent<unknown, unknown>;
+  let fixture: ComponentFixture<DynamicFormComponent<unknown, unknown>>;
 
   beforeEach(async () => {
     await TestBed
       .configureTestingModule({
-        declarations: [DynamicFormComponent]
+        imports: [ DynamicFormComponent ]
       })
       .compileComponents();
   });
@@ -25,21 +25,6 @@ describe('DynamicFormComponent', () => {
   });
 
   it(
-    'should generate correct configuration on ngInit (null)',
-    fakeAsync(() => {
-      component.ngOnInit();
-      component.config = null;
-      component.value = null;
-      component.componentMap = {};
-
-      tick(250);
-
-      expect(component.formReady).toBeFalse();
-      expect(component.formGroup).toBeUndefined();
-    })
-  );
-
-  it(
     'should generate correct configuration on ngInit (something)',
     fakeAsync(() => {
       component.config = {
@@ -48,7 +33,7 @@ describe('DynamicFormComponent', () => {
             id: 'title',
             label: 'Title',
             type: 'string',
-            validators: [{ type: 'required' }],
+            validators: [ { type: 'required' } ],
             errors: { required: 'Title is required' }
           },
           {

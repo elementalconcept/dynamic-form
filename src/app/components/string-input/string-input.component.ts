@@ -8,7 +8,7 @@ import { inputModeMap } from '../../types';
 @Component({
   selector: 'app-string-input',
   templateUrl: './string-input.component.html',
-  styleUrls: ['./string-input.component.scss']
+  styleUrls: [ './string-input.component.scss' ]
 })
 export class StringInputComponent implements DynamicFormPassThroughControl<unknown> {
   readonly type = 'passthrough';

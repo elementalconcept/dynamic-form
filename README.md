@@ -15,6 +15,17 @@ Install the library through NPM:
 $ npm i @elemental-concept/dynamic-form
 ```
 
+Choose the version corresponding to your Angular version:
+
+| Angular        | @elemental-concept/dynamic-form |
+| -------------- | ------------------------------- |
+| 16             | 16.x                            |
+| 13+ (ivy only) | 1.x+                            |
+
+Dynamic Form component is a standalone component starting with version 16.0.0 of the library.
+
+### Versions 1.x only!
+
 `DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
 
@@ -36,6 +47,10 @@ The library provides `DynamicFormComponent` and `DynamicFormFactoryService` to g
 cases `DynamicFormComponent` should be used directly. `DynamicFormFactoryService` can be used to create a completely
 custom solution when supplied component is not enough.
 
+Please note that `@elemental-concept/dynamic-form` DOES NOT provide any compatible input components!
+You should either provide your own input components or use a component library like
+[@elemental-concept/dynamic-form-material](https://github.com/elementalconcept/dynamic-form-material).
+
 `DynamicFormComponent` expects form configuration, form value and optional input component mapping. Form configuration
 describes all fields, their labels, validations, etc in a simple format. Value is a regular key-value map as used
 by `FormGroup`. `DynamicFormComponent` also provides a set of events for application to react to data and state changes.
@@ -55,7 +70,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-form',
   templateUrl: './my-form.component.html',
-  styleUrls: ['./my-form.component.scss']
+  styleUrls: [ './my-form.component.scss' ]
 })
 export class MyFormComponent {
   config = {
@@ -64,13 +79,13 @@ export class MyFormComponent {
         id: 'firstName',
         label: 'First name',
         type: 'string',
-        validators: [{ type: 'required' }]
+        validators: [ { type: 'required' } ]
       },
       {
         id: 'lastName',
         label: 'Last name',
         type: 'string',
-        validators: [{ type: 'required' }]
+        validators: [ { type: 'required' } ]
       }
     ]
   };
@@ -172,6 +187,7 @@ interface DynamicFormConfig<M> {
   elements: DynamicFormElement<M>[];
 
   endpoint?: string;
+  textTransformer?: (message: string) => string;
 }
 
 interface DynamicFormElement<M> {
@@ -181,6 +197,7 @@ interface DynamicFormElement<M> {
   disabled?: boolean;
   label?: string;
   placeholder?: string;
+  updateOn?: 'change' | 'blur' | 'submit';
   meta?: M;
   options?: DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];
@@ -208,6 +225,7 @@ Optional attributes:
   might only appear when a check box is selected. `dependsOn` allows you to express such behaviour.
 - `validators` - a set of Angular form validators to be applied to a form field.
 - `errors` - a set of error messages to show when validations fail.
+- `updateOn` - when to send update events.
 
 Example:
 
@@ -219,13 +237,13 @@ Example:
       id: 'firstName',
       label: 'First name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     },
     {
       id: 'lastName',
       label: 'Last name',
       type: 'string',
-      validators: [{ type: 'required' }]
+      validators: [ { type: 'required' } ]
     }
   ];
 }
@@ -269,8 +287,8 @@ Example
       id: 'email',
       label: 'Your e-mail for newsletter subscription',
       type: 'email',
-      validators: [{ type: 'email' }],
-      dependsOn: [{ id: 'subscribe', type: 'set' }]
+      validators: [ { type: 'email' } ],
+      dependsOn: [ { id: 'subscribe', type: 'set' } ]
     }
   ];
 }
@@ -326,14 +344,14 @@ Example:
 ```typescript
 {
   elements:
-    [
-      {
-        id: 'email',
-        label: 'E-mail',
-        type: 'email',
-        validators: [{ type: 'required' }, { type: 'email' }]
-      }
-    ];
+  [
+    {
+      id: 'email',
+      label: 'E-mail',
+      type: 'email',
+      validators: [ { type: 'required' }, { type: 'email' } ]
+    }
+  ];
 }
 ```
 
@@ -341,7 +359,7 @@ This is equal to:
 
 ```typescript
 new FormGroup({
-  email: new FormControl('', [Validators.required, Validators.email])
+  email: new FormControl('', [ Validators.required, Validators.email ])
 });
 ```
 
@@ -383,6 +401,7 @@ interface DynamicFormValidatorMaxLength {
 interface DynamicFormValidatorPattern {
   type: 'pattern';
   pattern: string;
+  errorCode: string;
 }
 
 export interface DynamicFormValidatorEqualTo {
@@ -413,4 +432,5 @@ A simple key-value map between error codes and their messages.
 ## Creating Custom Input Components
 
 This section is not finished yet. Please check the source code in the sample app on how it's done as well as
-_Material Components For Dynamic Form_ mentioned earlier.
+[@elemental-concept/dynamic-form-material](https://github.com/elementalconcept/dynamic-form-material)
+mentioned earlier.
