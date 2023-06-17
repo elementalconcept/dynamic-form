@@ -32,7 +32,7 @@ describe('DynamicFormFactoryService', () => {
     expect(service.getValidator({ type: 'max', value: 100 })).toBeInstanceOf(Function);
     expect(Validators.max).toHaveBeenCalledWith(100);
 
-    expect(service.getValidator({ type: 'pattern', pattern: 'abc', errorLabel: '' })).toBeInstanceOf(Function);
+    expect(service.getValidator({ type: 'pattern', pattern: 'abc', errorCode: '' })).toBeInstanceOf(Function);
     expect(Validators.pattern).toHaveBeenCalledWith('abc');
 
     expect(service.getValidator({ type: 'equalTo', field: 'password' })).toBeInstanceOf(Function);

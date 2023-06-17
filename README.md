@@ -22,6 +22,10 @@ Choose the version corresponding to your Angular version:
 | 16             | 16.x                            |
 | 13+ (ivy only) | 1.x+                            |
 
+Dynamic Form component is a standalone component starting with version 16.0.0 of the library.
+
+### Versions 1.x only!
+
 `DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
 
@@ -42,6 +46,10 @@ class SomeModule {
 The library provides `DynamicFormComponent` and `DynamicFormFactoryService` to generate forms in run-time. In most
 cases `DynamicFormComponent` should be used directly. `DynamicFormFactoryService` can be used to create a completely
 custom solution when supplied component is not enough.
+
+Please note that `@elemental-concept/dynamic-form` DOES NOT provide any compatible input components!
+You should either provide your own input components or use a component library like
+[@elemental-concept/dynamic-form-material](https://github.com/elementalconcept/dynamic-form-material).
 
 `DynamicFormComponent` expects form configuration, form value and optional input component mapping. Form configuration
 describes all fields, their labels, validations, etc in a simple format. Value is a regular key-value map as used
@@ -179,6 +187,7 @@ interface DynamicFormConfig<M> {
   elements: DynamicFormElement<M>[];
 
   endpoint?: string;
+  textTransformer?: (message: string) => string;
 }
 
 interface DynamicFormElement<M> {
@@ -188,6 +197,7 @@ interface DynamicFormElement<M> {
   disabled?: boolean;
   label?: string;
   placeholder?: string;
+  updateOn?: 'change' | 'blur' | 'submit';
   meta?: M;
   options?: DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];
@@ -215,6 +225,7 @@ Optional attributes:
   might only appear when a check box is selected. `dependsOn` allows you to express such behaviour.
 - `validators` - a set of Angular form validators to be applied to a form field.
 - `errors` - a set of error messages to show when validations fail.
+- `updateOn` - when to send update events.
 
 Example:
 
@@ -390,6 +401,7 @@ interface DynamicFormValidatorMaxLength {
 interface DynamicFormValidatorPattern {
   type: 'pattern';
   pattern: string;
+  errorCode: string;
 }
 
 export interface DynamicFormValidatorEqualTo {
@@ -420,4 +432,5 @@ A simple key-value map between error codes and their messages.
 ## Creating Custom Input Components
 
 This section is not finished yet. Please check the source code in the sample app on how it's done as well as
-_Material Components For Dynamic Form_ mentioned earlier.
+[@elemental-concept/dynamic-form-material](https://github.com/elementalconcept/dynamic-form-material)
+mentioned earlier.

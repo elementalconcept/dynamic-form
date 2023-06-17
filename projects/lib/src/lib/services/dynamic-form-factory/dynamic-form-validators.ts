@@ -31,7 +31,7 @@ export class DynamicFormValidators {
         const valid = regex.test(control.value);
 
         if (!valid) {
-          acc[pattern.errorLabel] = true;
+          acc[pattern.errorCode] = true;
         }
 
         return acc;

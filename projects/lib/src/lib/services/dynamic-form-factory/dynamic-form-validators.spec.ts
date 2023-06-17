@@ -57,12 +57,12 @@ describe('DynamicFormValidators', () => {
         {
           type: 'pattern',
           pattern: '^[0-9]+$',
-          errorLabel: 'pattern1'
+          errorCode: 'pattern1'
         },
         {
           type: 'pattern',
           pattern: '^[A-C]+$',
-          errorLabel: 'pattern2'
+          errorCode: 'pattern2'
         }
       ];
 
@@ -81,7 +81,7 @@ describe('DynamicFormValidators', () => {
         {
           type: 'pattern',
           pattern: '^[a-zA-Z ]+$',
-          errorLabel: 'pattern1'
+          errorCode: 'pattern1'
         }
       ];
 
