@@ -37,7 +37,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
+        deps: [ HttpClient ]
       }
     }),
 
@@ -45,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     MatButtonModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule {
 }

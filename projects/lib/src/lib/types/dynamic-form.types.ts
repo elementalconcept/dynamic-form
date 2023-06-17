@@ -1,13 +1,12 @@
 import { ComponentRef, InjectionToken } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { DynamicFormComponentMap } from './dynamic-form-component-map.types';
 import { DynamicFormControl } from './dynamic-form-control.types';
 import { DynamicFormElement } from './dynamic-form-element.types';
-import { DynamicFormValue } from './dynamic-form-value.types';
 
-export interface DynamicForm<M> {
-  formGroup: UntypedFormGroup;
+export interface DynamicForm<M, V> {
+  formGroup: FormGroup<Record<keyof V, AbstractControl>>;
   components: DynamicFormComponentDescriptor<M>[];
 }
 
@@ -24,12 +23,12 @@ export const DYNAMIC_FORM_COMPONENT_MAP = new InjectionToken<DynamicFormComponen
   }
 );
 
-export interface DynamicFormComponentStatus {
+export interface DynamicFormComponentStatus<V> {
   status: string;
-  formGroup: UntypedFormGroup;
+  formGroup: FormGroup<Record<keyof V, AbstractControl>>;
 }
 
-export interface DynamicFormComponentValue {
-  value: DynamicFormValue;
-  formGroup: UntypedFormGroup;
+export interface DynamicFormComponentValue<V> {
+  value: V;
+  formGroup: FormGroup<Record<keyof V, AbstractControl>>;
 }

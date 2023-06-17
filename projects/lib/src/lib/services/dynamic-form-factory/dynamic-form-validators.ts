@@ -7,7 +7,7 @@ export class DynamicFormValidators {
   static equalTo(field: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent?.controls?.hasOwnProperty(field)) {
-        const related = control.parent.controls[ field ];
+        const related = control.parent.controls[field];
 
         if (related.value !== control.value) {
           return { equalTo: true };
@@ -31,7 +31,7 @@ export class DynamicFormValidators {
         const valid = regex.test(control.value);
 
         if (!valid) {
-          acc[ pattern.errorLabel ] = true;
+          acc[pattern.errorLabel] = true;
         }
 
         return acc;

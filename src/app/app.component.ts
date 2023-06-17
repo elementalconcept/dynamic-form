@@ -14,7 +14,7 @@ import { customComponentMap, customConfig, customValue, FormValue } from './type
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent {
   customConfig$: Observable<DynamicFormConfig<unknown>>;

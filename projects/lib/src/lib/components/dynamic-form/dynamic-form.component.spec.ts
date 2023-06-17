@@ -3,13 +3,13 @@ import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testin
 import { DynamicFormComponent } from './dynamic-form.component';
 
 describe('DynamicFormComponent', () => {
-  let component: DynamicFormComponent<unknown>;
-  let fixture: ComponentFixture<DynamicFormComponent<unknown>>;
+  let component: DynamicFormComponent<unknown, unknown>;
+  let fixture: ComponentFixture<DynamicFormComponent<unknown, unknown>>;
 
   beforeEach(async () => {
     await TestBed
       .configureTestingModule({
-        declarations: [DynamicFormComponent]
+        declarations: [ DynamicFormComponent ]
       })
       .compileComponents();
   });
@@ -33,7 +33,7 @@ describe('DynamicFormComponent', () => {
             id: 'title',
             label: 'Title',
             type: 'string',
-            validators: [{ type: 'required' }],
+            validators: [ { type: 'required' } ],
             errors: { required: 'Title is required' }
           },
           {
