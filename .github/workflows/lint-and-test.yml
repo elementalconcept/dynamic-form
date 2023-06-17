@@ -2,9 +2,9 @@ name: Lint and test
 
 on:
   push:
-    branches: [ main, v16 ]
+    branches: [ main, v16.x, v1.x ]
   pull_request:
-    branches: [ main, v16 ]
+    branches: [ main, v16.x, v1.x ]
 
 jobs:
   build:
