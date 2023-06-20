@@ -32,7 +32,7 @@ export class DynamicFormFactoryService {
     config.elements.forEach(this.insertFormControl(value, formGroup));
 
     const components = config.elements
-      .map(this.mapFormComponent(componentMap, formGroup))
+      .map(this.mapFormComponent(componentMap, formGroup, config))
       .filter(ref => ref !== null) as DynamicFormComponentDescriptor<M>[];
 
     return {
@@ -42,7 +42,7 @@ export class DynamicFormFactoryService {
   };
 
   mapFormComponent =
-    <M>(componentMap: DynamicFormComponentMap<M>, formGroup: FormGroup) =>
+    <M>(componentMap: DynamicFormComponentMap<M>, formGroup: FormGroup, config: DynamicFormConfig<M>) =>
     (element: DynamicFormElement<M>): DynamicFormComponentDescriptor<M> | null => {
       if (element.type in componentMap) {
         const factory = this.componentFactoryResolver.resolveComponentFactory(componentMap[element.type]);
@@ -53,6 +53,7 @@ export class DynamicFormFactoryService {
         }
 
         componentRef.instance.formControl = formGroup.controls[element.id];
+        componentRef.instance.textTransformer = config.textTransformer;
         componentRef.instance.dynamicFormElement = element;
 
         return {

@@ -10,6 +10,8 @@ interface DynamicFormControlCommon<M> {
   showControl: () => void;
 
   hideControl: () => void;
+
+  textTransformer?: (message: string) => string;
 }
 
 export interface DynamicFormControlCVA<M> extends DynamicFormControlCommon<M>, ControlValueAccessor {
