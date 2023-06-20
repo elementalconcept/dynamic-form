@@ -28,7 +28,7 @@ export class AppComponent {
     this.customConfig$ = this.translationFilterService.wrap(customConfig);
   }
 
-  onCustomVStatusChanges = (data: DynamicFormComponentStatus) => this.customStatus = data.status;
+  onCustomVStatusChanges = (data: DynamicFormComponentStatus<FormValue>) => this.customStatus = data.status;
 
-  onCustomValueChanges = (data: DynamicFormComponentValue) => this.customFormValue = data.value as FormValue;
+  onCustomValueChanges = (data: DynamicFormComponentValue<FormValue>) => this.customFormValue = data.value as FormValue;
 }
