@@ -24,7 +24,7 @@ import {
 @Component({
   selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.scss']
+  styleUrls: []
 })
 export class DynamicFormComponent<M> implements OnInit {
   formGroup: UntypedFormGroup;
