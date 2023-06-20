@@ -25,7 +25,7 @@ import {
 @Component({
   selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: [ './dynamic-form.component.scss' ],
+  styleUrls: [],
   standalone: true,
   imports: [
     CommonModule,
