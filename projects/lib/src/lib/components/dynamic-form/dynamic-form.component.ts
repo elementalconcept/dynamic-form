@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
@@ -26,7 +26,7 @@ import {
   styleUrls: []
 })
 export class DynamicFormComponent<M, V> implements OnInit {
-  formGroup: UntypedFormGroup;
+  formGroup: FormGroup<Record<keyof V, AbstractControl>>;
 
   formReady: boolean;
 
@@ -110,7 +110,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
         untilDestroyed(this),
         filter(() => this.formReady)
       )
-      .subscribe(value => this.formGroup.patchValue(value));
+      .subscribe(value => this.formGroup.patchValue(value as any));
 
     // We can only render a form in DOM when we have
     // both DOM node reference (controlled by formReady flag)
@@ -123,7 +123,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
       .subscribe(this.renderForm);
   }
 
-  onSubmit = () => this.formSubmit.emit({ formGroup: this.formGroup, value: this.formGroup.value });
+  onSubmit = () => this.formSubmit.emit({ formGroup: this.formGroup, value: this.formGroup.value as V });
 
   private createForm = (
     [config, value, componentMap]: [DynamicFormConfig<M>, V, DynamicFormComponentMap<M>]
@@ -149,7 +149,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
       )
       .subscribe(v =>
         this.valueChanges.emit({
-          value: v,
+          value: v as V,
           formGroup: this.formGroup
         })
       );
