@@ -17,7 +17,7 @@ import { customComponentMap, customConfig, customValue, FormValue } from './type
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  customConfig$: Observable<DynamicFormConfig<unknown>>;
+  customConfig$: Observable<DynamicFormConfig<unknown, FormValue>>;
 
   customValue = customValue;
   customComponentMap = customComponentMap;
@@ -28,7 +28,7 @@ export class AppComponent {
     this.customConfig$ = this.translationFilterService.wrap(customConfig);
   }
 
-  onCustomVStatusChanges = (data: DynamicFormComponentStatus<FormValue>) => this.customStatus = data.status;
+  onCustomStatusChanges = (data: DynamicFormComponentStatus<FormValue>) => this.customStatus = data.status;
 
   onCustomValueChanges = (data: DynamicFormComponentValue<FormValue>) => this.customFormValue = data.value as FormValue;
 }

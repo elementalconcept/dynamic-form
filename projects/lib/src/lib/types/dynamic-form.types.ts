@@ -7,15 +7,15 @@ import { DynamicFormElement } from './dynamic-form-element.types';
 
 export interface DynamicForm<M, V> {
   formGroup: FormGroup<Record<keyof V, AbstractControl>>;
-  components: DynamicFormComponentDescriptor<M>[];
+  components: DynamicFormComponentDescriptor<M, V>[];
 }
 
-export interface DynamicFormComponentDescriptor<M> {
-  config: DynamicFormElement<M>;
-  component: ComponentRef<DynamicFormControl<M>>;
+export interface DynamicFormComponentDescriptor<M, V> {
+  config: DynamicFormElement<M, V>;
+  component: ComponentRef<DynamicFormControl<M, V>>;
 }
 
-export const DYNAMIC_FORM_COMPONENT_MAP = new InjectionToken<DynamicFormComponentMap<unknown>>(
+export const DYNAMIC_FORM_COMPONENT_MAP = new InjectionToken<DynamicFormComponentMap<unknown, unknown>>(
   'DYNAMIC_FORM_COMPONENT_MAP',
   {
     providedIn: 'root',

@@ -1,0 +1,13 @@
+<p>visible: {{ visible }}</p>
+<p>config: {{ config }}</p>
+<p>formGroup: {{ formGroup }}</p>
+<p *ngIf="visible && config && formGroup" [formGroup]="formGroup">
+  <label>
+    {{ config.label }}
+    <select [formControlName]="config.id">
+      <option *ngFor="let option of config.filteredOptions" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </label>
+</p>
