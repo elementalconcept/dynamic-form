@@ -60,13 +60,17 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   @Input()
   set config(config: DynamicFormConfig<M, V> | null | undefined) {
-    this.config$.next({
-      ...config,
-      elements: config.elements.map(element => ({
-        ...element,
-        filteredOptions: element.options
-      }))
-    });
+    const result = config instanceof Object
+      ? {
+        ...config,
+        elements: config.elements.map(element => ({
+          ...element,
+          filteredOptions: element.options
+        }))
+      }
+      : config;
+
+    this.config$.next(result);
   }
 
   @Input()
