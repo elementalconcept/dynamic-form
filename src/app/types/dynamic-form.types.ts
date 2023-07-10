@@ -8,6 +8,8 @@ export interface FormValue {
   email: string;
   password: string;
   misc: string;
+  filter: string;
+  select: number;
 }
 
 export const customConfig: DynamicFormConfig<unknown, FormValue> = {
@@ -46,10 +48,42 @@ export const customConfig: DynamicFormConfig<unknown, FormValue> = {
       ]
     },
     {
+      id: 'filter',
+      label: 'Filter',
+      type: 'string'
+    },
+    {
       id: 'select',
       label: 'Select',
       type: 'select',
-      options: []
+      options: [
+        { value: 1, label: 'Assembly' },
+        { value: 2, label: 'Bash' },
+        { value: 3, label: 'C#' },
+        { value: 4, label: 'Java' },
+        { value: 5, label: 'JavaScript' },
+        { value: 6, label: 'Perl' },
+        { value: 7, label: 'Python' },
+        { value: 8, label: 'Scala' },
+        { value: 9, label: 'TypeScript' }
+      ],
+      optionsFilter: (oldValue, newValue, formElement, patchValue: (value: Partial<FormValue>) => void) => {
+        console.log('optionsFilter');
+
+        if (oldValue.filter === newValue.filter) {
+          return formElement.filteredOptions;
+        }
+
+        const result = newValue.filter.trim().length === 0
+          ? formElement.options
+          : formElement.options.filter(o => o.label.includes(newValue.filter));
+
+        if (result.length > 0) {
+          patchValue({ [formElement.id]: result[0].value });
+        }
+
+        return result;
+      }
     }
   ]
 };
@@ -59,7 +93,9 @@ export const customValue: FormValue = {
   lastName: 'Myself',
   email: null,
   password: null,
-  misc: null
+  misc: null,
+  filter: '',
+  select: 1
 };
 
 export const customComponentMap: DynamicFormComponentMap<unknown, FormValue> = {

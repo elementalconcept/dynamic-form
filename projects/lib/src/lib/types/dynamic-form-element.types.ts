@@ -14,7 +14,12 @@ export interface DynamicFormElement<M, V> {
   meta?: M;
   options?: DynamicFormElementOption[];
   filteredOptions?: DynamicFormElementOption[];
-  optionsFilter?: (oldValue: V, newValue: V, formElement: DynamicFormElement<M, V>) => DynamicFormElementOption[];
+  optionsFilter?: (
+    oldValue: V,
+    newValue: V,
+    formElement: DynamicFormElement<M, V>,
+    patchValue: (value: Partial<V>) => void
+  ) => DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];
   validators?: DynamicFormValidator[];
   errors?: DynamicFormErrors;

@@ -8,7 +8,7 @@ import { DynamicFormElement, DynamicFormPassThroughControl } from '@elemental-co
   styleUrls: ['./select-input.component.scss']
 })
 export class SelectInputComponent implements DynamicFormPassThroughControl<unknown, unknown> {
-  type: 'passthrough';
+  readonly type = 'passthrough';
 
   config: DynamicFormElement<unknown, unknown>;
 

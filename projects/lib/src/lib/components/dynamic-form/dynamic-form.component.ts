@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
-import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription } from 'rxjs';
+import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription, timer } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -167,6 +167,8 @@ export class DynamicFormComponent<M, V> implements OnInit {
         })
       );
 
+    this.filterOptions(dynamicForm);
+
     this.dynamicForm$.next(dynamicForm);
   };
 
@@ -181,15 +183,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
     this.dynamicForm$
       .pipe(take(1))
       .subscribe(dynamicForm => {
-        dynamicForm.components
-          .filter(item => item.config.options instanceof Array && typeof item.config.optionsFilter === 'function')
-          .forEach(item =>
-            item.config.filteredOptions = item.config.optionsFilter(
-              this.oldValue,
-              dynamicForm.formGroup.value as V,
-              item.config
-            )
-          );
+        this.filterOptions(dynamicForm);
 
         dynamicForm.components
           .filter(item => item.config.dependsOn instanceof Array && item.config.dependsOn.length > 0)
@@ -202,6 +196,21 @@ export class DynamicFormComponent<M, V> implements OnInit {
         this.oldValue = dynamicForm.formGroup.value as V;
       });
   };
+
+  private filterOptions = (dynamicForm: DynamicForm<M, V>) => {
+    dynamicForm.components
+      .filter(item => item.config.options instanceof Array && typeof item.config.optionsFilter === 'function')
+      .forEach(item =>
+        item.config.filteredOptions = item.config.optionsFilter(
+          this.oldValue,
+          dynamicForm.formGroup.value as V,
+          item.config,
+          this.patchValue
+        )
+      );
+  };
+
+  private patchValue = (value: Partial<V>) => timer(1).subscribe(() => this.formGroup.patchValue(value as any));
 
   private isComponentVisible = (dynamicForm: DynamicForm<M, V>, item: DynamicFormComponentDescriptor<M, V>) =>
     item.config.dependsOn.reduce(this.checkDependency(dynamicForm), true);
