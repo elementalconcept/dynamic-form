@@ -60,7 +60,13 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   @Input()
   set config(config: DynamicFormConfig<M, V> | null | undefined) {
-    this.config$.next(config);
+    this.config$.next({
+      ...config,
+      elements: config.elements.map(element => ({
+        ...element,
+        filteredOptions: element.options
+      }))
+    });
   }
 
   @Input()
