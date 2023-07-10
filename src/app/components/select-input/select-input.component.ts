@@ -20,6 +20,7 @@ export class SelectInputComponent implements DynamicFormPassThroughControl<unkno
 
   set dynamicFormElement(element: DynamicFormElement<unknown, unknown>) {
     this.config = element;
+    console.log('xxx');
   }
 
   showControl = () => this.visible = true;

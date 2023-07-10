@@ -44,6 +44,12 @@ export const customConfig: DynamicFormConfig<unknown, FormValue> = {
       dependsOn: [
         { id: 'firstName', type: 'equals', value: 'test' }
       ]
+    },
+    {
+      id: 'select',
+      label: 'Select',
+      type: 'select',
+      options: []
     }
   ]
 };

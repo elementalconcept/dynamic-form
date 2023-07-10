@@ -1,3 +1,6 @@
+<p>visible: {{ visible }}</p>
+<p>config: {{ config }}</p>
+<p>formGroup: {{ formGroup }}</p>
 <p *ngIf="visible && config && formGroup" [formGroup]="formGroup">
   <label>
     {{ config.label }}
