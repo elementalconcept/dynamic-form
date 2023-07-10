@@ -1,6 +1,6 @@
 import { DynamicFormComponentMap, DynamicFormConfig } from '@elemental-concept/dynamic-form';
 
-import { StringInputComponent } from '../components';
+import { SelectInputComponent, StringInputComponent } from '../components';
 
 export interface FormValue {
   firstName: string;
@@ -62,5 +62,6 @@ export const customComponentMap: DynamicFormComponentMap<unknown, FormValue> = {
   email: StringInputComponent,
   tel: StringInputComponent,
   url: StringInputComponent,
-  password: StringInputComponent
+  password: StringInputComponent,
+  select: SelectInputComponent
 };

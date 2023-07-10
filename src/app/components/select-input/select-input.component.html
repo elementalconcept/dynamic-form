@@ -1,1 +1,10 @@
-<p>select-input works!</p>
+<p *ngIf="visible && config && formGroup" [formGroup]="formGroup">
+  <label>
+    {{ config.label }}
+    <select [formControlName]="config.id">
+      <option *ngFor="let option of config.filteredOptions" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+  </label>
+</p>
