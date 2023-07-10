@@ -13,12 +13,12 @@ export class TranslationFilterService {
   constructor(private readonly translate: TranslateService) {
   }
 
-  wrap = <M>(config: DynamicFormConfig<M>): Observable<DynamicFormConfig<M>> =>
+  wrap = <M, V>(config: DynamicFormConfig<M, V>): Observable<DynamicFormConfig<M, V>> =>
     this.translate
       .stream(this.collectKeys(config))
       .pipe(map(translations => this.updateTranslations(config, translations)));
 
-  private collectKeys = <M>(config: DynamicFormConfig<M>): string[] =>
+  private collectKeys = <M, V>(config: DynamicFormConfig<M, V>): string[] =>
     config.elements.reduce(
       (acc, element) => {
         acc.push(element.label);
@@ -48,15 +48,15 @@ export class TranslationFilterService {
       []
     );
 
-  private updateTranslations = <M>(
-    config: DynamicFormConfig<M>,
+  private updateTranslations = <M, V>(
+    config: DynamicFormConfig<M, V>,
     translations: { [key: string]: string; }
-  ): DynamicFormConfig<M> => {
+  ): DynamicFormConfig<M, V> => {
     return {
       ...config,
 
       elements: config.elements.map(element => {
-        const result: DynamicFormElement<M> = {
+        const result: DynamicFormElement<M, V> = {
           ...element,
           label: translations[element.label]
         };

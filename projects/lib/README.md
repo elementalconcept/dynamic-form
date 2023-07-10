@@ -326,14 +326,14 @@ Example:
 ```typescript
 {
   elements:
-    [
-      {
-        id: 'email',
-        label: 'E-mail',
-        type: 'email',
-        validators: [{ type: 'required' }, { type: 'email' }]
-      }
-    ];
+  [
+    {
+      id: 'email',
+      label: 'E-mail',
+      type: 'email',
+      validators: [{ type: 'required' }, { type: 'email' }]
+    }
+  ];
 }
 ```
 

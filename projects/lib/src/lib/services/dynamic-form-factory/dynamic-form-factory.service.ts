@@ -22,9 +22,9 @@ export class DynamicFormFactoryService {
   }
 
   createForm = <M, V>(
-    config: DynamicFormConfig<M>,
+    config: DynamicFormConfig<M, V>,
     value: V,
-    componentMap: DynamicFormComponentMap<M>
+    componentMap: DynamicFormComponentMap<M, V>
   ): DynamicForm<M, V> => {
     const formGroup = new FormGroup<Record<keyof V, AbstractControl>>({} as Record<keyof V, AbstractControl>);
 
@@ -41,30 +41,30 @@ export class DynamicFormFactoryService {
   };
 
   mapFormComponent =
-    <M>(componentMap: DynamicFormComponentMap<M>, formGroup: FormGroup, config: DynamicFormConfig<M>) =>
-      (element: DynamicFormElement<M>): DynamicFormComponentDescriptor<M> | null => {
-        if (element.type in componentMap) {
-          const factory = this.componentFactoryResolver.resolveComponentFactory(componentMap[ element.type ]);
-          const componentRef: ComponentRef<DynamicFormControl<M>> = factory.create(this.injector);
+    <M, V>(componentMap: DynamicFormComponentMap<M, V>, formGroup: FormGroup, config: DynamicFormConfig<M, V>) =>
+    (element: DynamicFormElement<M, V>): DynamicFormComponentDescriptor<M, V> | null => {
+      if (element.type in componentMap) {
+        const factory = this.componentFactoryResolver.resolveComponentFactory(componentMap[element.type]);
+        const componentRef: ComponentRef<DynamicFormControl<M, V>> = factory.create(this.injector);
 
-          if (componentRef.instance.type === 'passthrough') {
-            componentRef.instance.formGroup = formGroup;
-          }
-
-          componentRef.instance.formControl = formGroup.controls[ element.id ];
-          componentRef.instance.textTransformer = config.textTransformer;
-          componentRef.instance.dynamicFormElement = element;
-
-          return {
-            config: element,
-            component: componentRef
-          };
+        if (componentRef.instance.type === 'passthrough') {
+          componentRef.instance.formGroup = formGroup;
         }
 
-        return null;
-      };
+        componentRef.instance.formControl = formGroup.controls[element.id];
+        componentRef.instance.textTransformer = config.textTransformer;
+        componentRef.instance.dynamicFormElement = element;
 
-  insertFormControl = <V>(value: V, formGroup: FormGroup) => <M>(element: DynamicFormElement<M>) => {
+        return {
+          config: element,
+          component: componentRef
+        };
+      }
+
+      return null;
+    };
+
+  insertFormControl = <V>(value: V, formGroup: FormGroup) => <M>(element: DynamicFormElement<M, V>) => {
     if (element.type === '_description_') {
       return;
     }
@@ -75,7 +75,10 @@ export class DynamicFormFactoryService {
         .filter(validator => validator !== null)
       : [];
 
-    formGroup.addControl(element.id, this.createFormControl(value[ element.id ], validators, element.disabled, element.updateOn));
+    formGroup.addControl(
+      element.id,
+      this.createFormControl(value[element.id], validators, element.disabled, element.updateOn)
+    );
   };
 
   getValidator = (validator: DynamicFormValidator): ValidatorFn | null => {
@@ -115,9 +118,10 @@ export class DynamicFormFactoryService {
     }
   };
 
-  createFormControl = (value: any,
-                       validators: ValidatorFn[],
-                       disabled: boolean,
-                       updateOn: 'change' | 'blur' | 'submit' = 'change'): FormControl =>
-    new FormControl({ value, disabled }, { updateOn, validators });
+  createFormControl = (
+    value: any,
+    validators: ValidatorFn[],
+    disabled: boolean,
+    updateOn: 'change' | 'blur' | 'submit' = 'change'
+  ): FormControl => new FormControl({ value, disabled }, { updateOn, validators });
 }

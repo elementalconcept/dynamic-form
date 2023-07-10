@@ -8,12 +8,12 @@ import { inputModeMap } from '../../types';
 @Component({
   selector: 'app-string-input',
   templateUrl: './string-input.component.html',
-  styleUrls: [ './string-input.component.scss' ]
+  styleUrls: ['./string-input.component.scss']
 })
-export class StringInputComponent implements DynamicFormPassThroughControl<unknown> {
+export class StringInputComponent implements DynamicFormPassThroughControl<unknown, unknown> {
   readonly type = 'passthrough';
 
-  config: DynamicFormElement<unknown>;
+  config: DynamicFormElement<unknown, unknown>;
 
   inputMode = 'text';
 
@@ -27,11 +27,11 @@ export class StringInputComponent implements DynamicFormPassThroughControl<unkno
 
   textTransformer?: (message: string) => string;
 
-  set dynamicFormElement(element: DynamicFormElement<unknown>) {
+  set dynamicFormElement(element: DynamicFormElement<unknown, unknown>) {
     this.config = element;
 
     if (this.config.type in inputModeMap) {
-      this.inputMode = inputModeMap[ this.config.type ];
+      this.inputMode = inputModeMap[this.config.type];
     }
 
     this.inputType = this.config.type === 'password' ? 'password' : 'text';

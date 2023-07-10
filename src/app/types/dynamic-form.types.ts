@@ -10,32 +10,32 @@ export interface FormValue {
   misc: string;
 }
 
-export const customConfig: DynamicFormConfig<FormValue> = {
-  textTransformer: message => `XXX: ${ message }`,
+export const customConfig: DynamicFormConfig<unknown, FormValue> = {
+  textTransformer: message => `XXX: ${message}`,
   elements: [
     {
       id: 'firstName',
       label: 'module.auth.login.form.config.firstName',
       type: 'string',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'lastName',
       label: 'module.auth.login.form.config.lastName',
       type: 'string',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'email',
       label: 'module.auth.login.form.config.email',
       type: 'email',
-      validators: [ { type: 'required' }, { type: 'email' } ]
+      validators: [{ type: 'required' }, { type: 'email' }]
     },
     {
       id: 'password',
       label: 'module.auth.login.form.config.password',
       type: 'password',
-      validators: [ { type: 'required' } ]
+      validators: [{ type: 'required' }]
     },
     {
       id: 'misc',
@@ -56,7 +56,7 @@ export const customValue: FormValue = {
   misc: null
 };
 
-export const customComponentMap: DynamicFormComponentMap<unknown> = {
+export const customComponentMap: DynamicFormComponentMap<unknown, FormValue> = {
   string: StringInputComponent,
   number: StringInputComponent,
   email: StringInputComponent,
