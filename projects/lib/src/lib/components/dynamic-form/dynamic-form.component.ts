@@ -173,7 +173,13 @@ export class DynamicFormComponent<M, V> implements OnInit {
       .subscribe(dynamicForm => {
         dynamicForm.components
           .filter(item => item.config.options instanceof Array && typeof item.config.optionsFilter === 'function')
-          .forEach(item => item.config.optionsFilter(this.oldValue, dynamicForm.formGroup.value as V, item.config));
+          .forEach(item =>
+            item.config.filteredOptions = item.config.optionsFilter(
+              this.oldValue,
+              dynamicForm.formGroup.value as V,
+              item.config
+            )
+          );
 
         dynamicForm.components
           .filter(item => item.config.dependsOn instanceof Array && item.config.dependsOn.length > 0)

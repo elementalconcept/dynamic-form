@@ -13,6 +13,7 @@ export interface DynamicFormElement<M, V> {
   updateOn?: 'change' | 'blur' | 'submit';
   meta?: M;
   options?: DynamicFormElementOption[];
+  filteredOptions?: DynamicFormElementOption[];
   optionsFilter?: (oldValue: V, newValue: V, formElement: DynamicFormElement<M, V>) => DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];
   validators?: DynamicFormValidator[];
