@@ -6,6 +6,7 @@ the library and must be provided by a library user. A set of Material based inpu
 [Material Components For Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
 .
 `Dynamic Form 1.x` is only compatible with Angular v13 v14 and v15.
+Future releases from the 16.0.0 are directly linked to the correspondent Angular version.
 
 ## Installation
 
@@ -14,17 +15,6 @@ Install the library through NPM:
 ```shell
 $ npm i @elemental-concept/dynamic-form
 ```
-
-Choose the version corresponding to your Angular version:
-
-| Angular        | @elemental-concept/dynamic-form |
-| -------------- | ------------------------------- |
-| 16             | 16.x                            |
-| 13+ (ivy only) | 1.x+                            |
-
-Dynamic Form component is a standalone component starting with version 16.0.0 of the library.
-
-### Versions 1.x only!
 
 `DynamicFormModule` should be included into your Angular modules automatically by IDE. If your IDE doesn't support such
 functionality, don't forget to add it manually:
@@ -47,10 +37,6 @@ The library provides `DynamicFormComponent` and `DynamicFormFactoryService` to g
 cases `DynamicFormComponent` should be used directly. `DynamicFormFactoryService` can be used to create a completely
 custom solution when supplied component is not enough.
 
-Please note that `@elemental-concept/dynamic-form` DOES NOT provide any compatible input components!
-You should either provide your own input components or use a component library like
-[@elemental-concept/dynamic-form-material](https://github.com/elementalconcept/dynamic-form-material).
-
 `DynamicFormComponent` expects form configuration, form value and optional input component mapping. Form configuration
 describes all fields, their labels, validations, etc in a simple format. Value is a regular key-value map as used
 by `FormGroup`. `DynamicFormComponent` also provides a set of events for application to react to data and state changes.
@@ -60,7 +46,7 @@ Additionally, custom HTML can be placed inside the form if needed.
 
 ```angular2html
 <!-- my-form.component.html -->
-<dynamic-form [config]="config" [value]="value"></dynamic-form>
+<ecdf-dynamic-form [config]="config" [value]="value"></ecdf-dynamic-form>
 ```
 
 ```typescript
@@ -187,7 +173,6 @@ interface DynamicFormConfig<M> {
   elements: DynamicFormElement<M>[];
 
   endpoint?: string;
-  textTransformer?: (message: string) => string;
 }
 
 interface DynamicFormElement<M> {
@@ -197,7 +182,6 @@ interface DynamicFormElement<M> {
   disabled?: boolean;
   label?: string;
   placeholder?: string;
-  updateOn?: 'change' | 'blur' | 'submit';
   meta?: M;
   options?: DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];
@@ -225,7 +209,6 @@ Optional attributes:
   might only appear when a check box is selected. `dependsOn` allows you to express such behaviour.
 - `validators` - a set of Angular form validators to be applied to a form field.
 - `errors` - a set of error messages to show when validations fail.
-- `updateOn` - when to send update events.
 
 Example:
 
@@ -401,7 +384,6 @@ interface DynamicFormValidatorMaxLength {
 interface DynamicFormValidatorPattern {
   type: 'pattern';
   pattern: string;
-  errorCode: string;
 }
 
 export interface DynamicFormValidatorEqualTo {
@@ -432,5 +414,4 @@ A simple key-value map between error codes and their messages.
 ## Creating Custom Input Components
 
 This section is not finished yet. Please check the source code in the sample app on how it's done as well as
-[@elemental-concept/dynamic-form-material](https://github.com/elementalconcept/dynamic-form-material)
-mentioned earlier.
+_Material Components For Dynamic Form_ mentioned earlier.

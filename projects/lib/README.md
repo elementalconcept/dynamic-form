@@ -6,6 +6,7 @@ the library and must be provided by a library user. A set of Material based inpu
 [Material Components For Dynamic Form](https://github.com/elementalconcept/dynamic-form-material/)
 .
 `Dynamic Form 1.x` is only compatible with Angular v13 v14 and v15.
+Future releases from the 16.0.0 are directly linked to the correspondent Angular version.
 
 ## Installation
 
