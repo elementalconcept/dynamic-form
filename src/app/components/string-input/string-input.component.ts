@@ -45,7 +45,7 @@ export class StringInputComponent implements DynamicFormPassThroughControl<unkno
     return key === undefined
       ? ''
       : this.textTransformer === undefined
-        ? key
-        : this.textTransformer(key);
-  }
+      ? key
+      : this.textTransformer(key);
+  };
 }
