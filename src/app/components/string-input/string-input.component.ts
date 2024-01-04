@@ -25,6 +25,8 @@ export class StringInputComponent implements DynamicFormPassThroughControl<unkno
 
   visible = true;
 
+  textTransformer?: (message: string) => string;
+
   set dynamicFormElement(element: DynamicFormElement<unknown>) {
     this.config = element;
 
@@ -38,4 +40,12 @@ export class StringInputComponent implements DynamicFormPassThroughControl<unkno
   showControl = () => this.visible = true;
 
   hideControl = () => this.visible = false;
+
+  transform = (key: string | undefined): string => {
+    return key === undefined
+      ? ''
+      : this.textTransformer === undefined
+      ? key
+      : this.textTransformer(key);
+  };
 }

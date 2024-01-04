@@ -13,12 +13,10 @@ export class AppComponent {
   customConfig = customConfig;
 
   customValue = customValue;
-  customComponentMap = customComponentMap;
-  customStatus: string;
-  customFormValue: FormValue = customValue;
 
-  constructor() {
-  }
+  customStatus: string;
+
+  customFormValue: FormValue = customValue;
 
   onCustomVStatusChanges = (data: DynamicFormComponentStatus<FormValue>) => this.customStatus = data.status;
 

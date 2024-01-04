@@ -1,6 +1,6 @@
 <p *ngIf="visible && config && formGroup" [formGroup]="formGroup">
   <label>
-    {{ config.label }}
+    {{ transform(config.label) }}
     <input [attr.type]="inputType"
            [attr.inputmode]="inputMode"
            [formControlName]="config.id">
