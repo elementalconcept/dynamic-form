@@ -11,34 +11,35 @@ export interface FormValue {
 }
 
 export const customConfig: DynamicFormConfig<FormValue> = {
+  textTransformer: key => `transform: ${key}`,
   elements: [
     {
       id: 'firstName',
-      label: 'module.auth.login.form.config.firstName',
+      label: 'firstName',
       type: 'string',
       validators: [ { type: 'required' } ]
     },
     {
       id: 'lastName',
-      label: 'module.auth.login.form.config.lastName',
+      label: 'lastName',
       type: 'string',
       validators: [ { type: 'required' } ]
     },
     {
       id: 'email',
-      label: 'module.auth.login.form.config.email',
+      label: 'email',
       type: 'email',
       validators: [ { type: 'required' }, { type: 'email' } ]
     },
     {
       id: 'password',
-      label: 'module.auth.login.form.config.password',
+      label: 'password',
       type: 'password',
       validators: [ { type: 'required' } ]
     },
     {
       id: 'misc',
-      label: 'module.auth.login.form.config.misc',
+      label: 'misc',
       type: 'string',
       dependsOn: [
         { id: 'firstName', type: 'equals', value: 'test' }
