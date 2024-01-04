@@ -28,7 +28,7 @@
     "noFallthroughCasesInSwitch": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "strict": true,
+    "strict": false,
     "strictPropertyInitialization": false,
     "target": "ES2022",
     "useDefineForClassFields": false

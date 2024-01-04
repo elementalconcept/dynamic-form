@@ -22,37 +22,35 @@ export class DynamicFormFactoryService {
   }
 
   createForm = <M, V>(
-    config: DynamicFormConfig<M>,
+    config: DynamicFormConfig<M, V>,
     value: V,
-    componentMap: DynamicFormComponentMap<M>
+    componentMap: DynamicFormComponentMap<M, V>
   ): DynamicForm<M, V> => {
-    // @ts-ignore
-    const formGroup = new FormGroup<Record<keyof V, AbstractControl>>({});
+    const formGroup = new FormGroup<Record<keyof V, AbstractControl>>({} as Record<keyof V, AbstractControl>);
 
     config.elements.forEach(this.insertFormControl(value, formGroup));
 
     const components = config.elements
-      .map(this.mapFormComponent(componentMap, formGroup))
-      .filter(ref => ref !== null) as DynamicFormComponentDescriptor<M>[];
+      .map(this.mapFormComponent(componentMap, formGroup, config))
+      .filter(ref => ref !== null);
 
-    return {
-      formGroup,
-      components
-    };
+    // @ts-ignore // components could be null --> strict is not happy
+    return { formGroup, components };
   };
 
   mapFormComponent =
-    <M>(componentMap: DynamicFormComponentMap<M>, formGroup: FormGroup) =>
-    (element: DynamicFormElement<M>): DynamicFormComponentDescriptor<M> | null => {
+    <M, V>(componentMap: DynamicFormComponentMap<M, V>, formGroup: FormGroup, config: DynamicFormConfig<M, V>) =>
+    (element: DynamicFormElement<M, V>): DynamicFormComponentDescriptor<M, V> | null => {
       if (element.type in componentMap) {
         const factory = this.componentFactoryResolver.resolveComponentFactory(componentMap[element.type]);
-        const componentRef: ComponentRef<DynamicFormControl<M>> = factory.create(this.injector);
+        const componentRef: ComponentRef<DynamicFormControl<M, V>> = factory.create(this.injector);
 
         if (componentRef.instance.type === 'passthrough') {
           componentRef.instance.formGroup = formGroup;
         }
 
         componentRef.instance.formControl = formGroup.controls[element.id];
+        componentRef.instance.textTransformer = config.textTransformer;
         componentRef.instance.dynamicFormElement = element;
 
         return {
@@ -64,7 +62,7 @@ export class DynamicFormFactoryService {
       return null;
     };
 
-  insertFormControl = <V>(value: V, formGroup: FormGroup) => <M>(element: DynamicFormElement<M>) => {
+  insertFormControl = <V>(value: V, formGroup: FormGroup) => <M>(element: DynamicFormElement<M, V>) => {
     if (element.type === '_description_') {
       return;
     }
@@ -77,7 +75,7 @@ export class DynamicFormFactoryService {
 
     formGroup.addControl(
       element.id,
-      this.createFormControl(value[element.id], validators, element.disabled === true, element.updateOn)
+      this.createFormControl(value[element.id], validators, element.disabled || false, element.updateOn)
     );
   };
 

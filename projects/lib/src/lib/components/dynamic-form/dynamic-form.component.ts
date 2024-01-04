@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
 import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription } from 'rxjs';
+import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription, timer } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
 
 import { DynamicFormFactoryService } from '../../services';
@@ -25,7 +25,7 @@ import {
 @Component({
   selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: [ './dynamic-form.component.scss' ],
+  styleUrls: [],
   standalone: true,
   imports: [
     CommonModule,
@@ -38,11 +38,13 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   formReady: boolean;
 
-  private readonly config$ = new ReplaySubject<DynamicFormConfig<M>>(1);
+  protected oldValue: V;
+
+  private readonly config$ = new ReplaySubject<DynamicFormConfig<M, V> | null | undefined>(1);
 
   private readonly value$ = new ReplaySubject<V>(1);
 
-  private readonly componentMap$ = new ReplaySubject<DynamicFormComponentMap<M>>(1);
+  private readonly componentMap$ = new ReplaySubject<DynamicFormComponentMap<M, V>>(1);
 
   private readonly dynamicForm$ = new ReplaySubject<DynamicForm<M, V>>(1);
 
@@ -54,7 +56,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   constructor(
     private readonly dynamicFormFactory: DynamicFormFactoryService,
-    @Inject(DYNAMIC_FORM_COMPONENT_MAP) componentMap: DynamicFormComponentMap<M>
+    @Inject(DYNAMIC_FORM_COMPONENT_MAP) componentMap: DynamicFormComponentMap<M, V>
   ) {
     this.componentMap$.next(componentMap);
   }
@@ -65,17 +67,28 @@ export class DynamicFormComponent<M, V> implements OnInit {
   }
 
   @Input()
-  set config(config: DynamicFormConfig<M>) {
-    this.config$.next(config);
+  set config(config: DynamicFormConfig<M, V> | null | undefined) {
+    const result = config instanceof Object
+      ? {
+        ...config,
+        elements: config.elements.map(element => ({
+          ...element,
+          filteredOptions: element.options
+        }))
+      }
+      : config;
+
+    this.config$.next(result);
   }
 
   @Input()
   set value(value: V) {
+    this.oldValue = value;
     this.value$.next(value);
   }
 
   @Input()
-  set componentMap(componentMap: DynamicFormComponentMap<M>) {
+  set componentMap(componentMap: DynamicFormComponentMap<M, V>) {
     this.componentMap$.next(componentMap);
   }
 
@@ -101,7 +114,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
         switchMap(config =>
           combineLatest([ this.value$, this.componentMap$ ])
             .pipe(map(([ value, componentMap ]) =>
-              [ config, value, componentMap ] as [ DynamicFormConfig<M>, V, DynamicFormComponentMap<M> ]
+              [ config, value, componentMap ] as [ DynamicFormConfig<M, V>, V, DynamicFormComponentMap<M, V> ]
             ))
         ),
         tap(() => this.valueChangesSub instanceof Object ? this.valueChangesSub.unsubscribe() : noop()),
@@ -136,7 +149,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
   onSubmit = () => this.formSubmit.emit({ formGroup: this.formGroup, value: this.formGroup.value as V });
 
   private createForm = (
-    [ config, value, componentMap ]: [ DynamicFormConfig<M>, V, DynamicFormComponentMap<M> ]
+    [ config, value, componentMap ]: [ DynamicFormConfig<M, V>, V, DynamicFormComponentMap<M, V> ]
   ) => {
     const dynamicForm = this.dynamicFormFactory.createForm(config, value, componentMap);
     this.formGroup = dynamicForm.formGroup;
@@ -164,6 +177,8 @@ export class DynamicFormComponent<M, V> implements OnInit {
         })
       );
 
+    this.filterOptions(dynamicForm);
+
     this.dynamicForm$.next(dynamicForm);
   };
 
@@ -177,18 +192,38 @@ export class DynamicFormComponent<M, V> implements OnInit {
   handleRelationships = () => {
     this.dynamicForm$
       .pipe(take(1))
-      .subscribe(dynamicForm =>
+      .subscribe(dynamicForm => {
+        this.filterOptions(dynamicForm);
+
         dynamicForm.components
-          .filter(item => item.config.dependsOn instanceof Array && item.config.dependsOn.length > 0)
+          .filter(item => item && item.config.dependsOn instanceof Array && item.config.dependsOn.length > 0)
           .forEach(item =>
             this.isComponentVisible(dynamicForm, item)
               ? item.component.instance.showControl()
               : item.component.instance.hideControl()
-          )
+          );
+
+        this.oldValue = dynamicForm.formGroup.value as V;
+      });
+  };
+
+  private filterOptions = (dynamicForm: DynamicForm<M, V>) => {
+    dynamicForm.components
+      .filter(item => item && item.config.options instanceof Array && typeof item.config.optionsFilter === 'function')
+      .forEach(item =>
+        // @ts-ignore // TS2722: Cannot invoke an object which is possibly undefined
+        item.config.filteredOptions = item.config.optionsFilter(
+          this.oldValue,
+          dynamicForm.formGroup.value as V,
+          item.config,
+          this.patchValue
+        )
       );
   };
 
-  private isComponentVisible = (dynamicForm: DynamicForm<M, V>, item: DynamicFormComponentDescriptor<M>) =>
+  private patchValue = (value: Partial<V>) => timer(1).subscribe(() => this.formGroup.patchValue(value as any));
+
+  private isComponentVisible = (dynamicForm: DynamicForm<M, V>, item: DynamicFormComponentDescriptor<M, V>) =>
     item.config.dependsOn!.reduce(this.checkDependency(dynamicForm), true);
 
   private checkDependency =

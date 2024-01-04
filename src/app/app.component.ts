@@ -20,7 +20,7 @@ export class AppComponent {
   constructor() {
   }
 
-  onCustomVStatusChanges = (data: DynamicFormComponentStatus<FormValue>) => this.customStatus = data.status;
+  onCustomStatusChanges = (data: DynamicFormComponentStatus<FormValue>) => this.customStatus = data.status;
 
   onCustomValueChanges = (data: DynamicFormComponentValue<FormValue>) => this.customFormValue = data.value as FormValue;
 }

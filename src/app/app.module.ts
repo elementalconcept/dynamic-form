@@ -13,7 +13,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 
-import { StringInputComponent } from './components';
+import { SelectInputComponent, StringInputComponent } from './components';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -23,7 +23,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
 
-    StringInputComponent
+    StringInputComponent,
+    SelectInputComponent
   ],
   imports: [
     BrowserModule,

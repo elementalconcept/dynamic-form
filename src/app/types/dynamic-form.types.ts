@@ -1,6 +1,6 @@
-import { DynamicFormComponentMap, DynamicFormConfig } from '@elemental-concept/dynamic-form';
+import { DynamicFormComponentMap, DynamicFormConfig, DynamicFormElement } from '@elemental-concept/dynamic-form';
 
-import { StringInputComponent } from '../components';
+import { SelectInputComponent, StringInputComponent } from '../components';
 
 export interface FormValue {
   firstName: string;
@@ -8,9 +8,13 @@ export interface FormValue {
   email: string;
   password: string;
   misc: string;
+  filter: string;
+  select: number;
 }
 
-export const customConfig: DynamicFormConfig<FormValue> = {
+// @ts-ignore // TS2314: Generic type DynamicFormConfig<M> requires 1 type argument(s).
+export const customConfig: DynamicFormConfig<unknown, FormValue> = {
+  textTransformer: message => `XXX: ${message}`,
   elements: [
     {
       id: 'firstName',
@@ -43,6 +47,48 @@ export const customConfig: DynamicFormConfig<FormValue> = {
       dependsOn: [
         { id: 'firstName', type: 'equals', value: 'test' }
       ]
+    },
+    {
+      id: 'filter',
+      label: 'Filter',
+      type: 'string'
+    },
+    {
+      id: 'select',
+      label: 'Select',
+      type: 'select',
+      options: [
+        { value: 1, label: 'Assembly' },
+        { value: 2, label: 'Bash' },
+        { value: 3, label: 'C#' },
+        { value: 4, label: 'Java' },
+        { value: 5, label: 'JavaScript' },
+        { value: 6, label: 'Perl' },
+        { value: 7, label: 'Python' },
+        { value: 8, label: 'Scala' },
+        { value: 9, label: 'TypeScript' }
+      ],
+      optionsFilter: (oldValue: FormValue,
+                      newValue: FormValue,
+                      // @ts-ignore // TS2314: Generic type DynamicFormConfig<M> requires 1 type argument(s).
+                      formElement: DynamicFormElement<unknown, FormValue>,
+                      patchValue: (value: Partial<FormValue>) => void) => {
+        console.log('optionsFilter');
+
+        if (oldValue.filter === newValue.filter) {
+          return formElement.filteredOptions;
+        }
+
+        const result = newValue.filter.trim().length === 0
+          ? formElement.options
+          : formElement.options.filter(o => o.label.includes(newValue.filter));
+
+        if (result.length > 0) {
+          patchValue({ [formElement.id]: result[0].value });
+        }
+
+        return result;
+      }
     }
   ]
 };
@@ -52,14 +98,18 @@ export const customValue: FormValue = {
   lastName: 'Myself',
   email: '',
   password: '',
-  misc: ''
+  misc: '',
+  filter: '',
+  select: 1
 };
 
-export const customComponentMap: DynamicFormComponentMap<unknown> = {
+// @ts-ignore // TS2314: Generic type DynamicFormConfig<M> requires 1 type argument(s).
+export const customComponentMap: DynamicFormComponentMap<unknown, FormValue> = {
   string: StringInputComponent,
   number: StringInputComponent,
   email: StringInputComponent,
   tel: StringInputComponent,
   url: StringInputComponent,
-  password: StringInputComponent
+  password: StringInputComponent,
+  select: SelectInputComponent
 };

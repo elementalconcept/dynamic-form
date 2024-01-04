@@ -3,7 +3,7 @@ import { DynamicFormElementRelationship } from './dynamic-form-element-relations
 import { DynamicFormErrors } from './dynamic-form-errors.types';
 import { DynamicFormValidator } from './dynamic-form-validator.types';
 
-export interface DynamicFormElement<M> {
+export interface DynamicFormElement<M, V> {
   id: string;
   type: '_description_' | string;
 
@@ -13,6 +13,13 @@ export interface DynamicFormElement<M> {
   updateOn?: 'change' | 'blur' | 'submit';
   meta?: M;
   options?: DynamicFormElementOption[];
+  filteredOptions?: DynamicFormElementOption[];
+  optionsFilter?: (
+    oldValue: V,
+    newValue: V,
+    formElement: DynamicFormElement<M, V>,
+    patchValue: (value: Partial<V>) => void
+  ) => DynamicFormElementOption[];
   dependsOn?: DynamicFormElementRelationship[];
   validators?: DynamicFormValidator[];
   errors?: DynamicFormErrors;
