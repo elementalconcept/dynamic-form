@@ -42,8 +42,6 @@ export class StringInputComponent implements DynamicFormPassThroughControl<unkno
   hideControl = () => this.visible = false;
 
   transform = (key: string | undefined): string => {
-    console.log(key, this.textTransformer);
-
     return key === undefined
       ? ''
       : this.textTransformer === undefined
