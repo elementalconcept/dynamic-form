@@ -32,7 +32,7 @@ export interface DynamicFormValidatorMaxLength {
 
 export interface DynamicFormValidatorPattern {
   type: 'pattern';
-  pattern: string;
+  pattern: string | RegExp;
   errorCode: string;
 }
 
