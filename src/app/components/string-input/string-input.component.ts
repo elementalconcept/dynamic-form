@@ -3,8 +3,8 @@ import { AbstractControl, UntypedFormGroup } from '@angular/forms';
 
 import { DynamicFormElement, DynamicFormPassThroughControl } from '@elemental-concept/dynamic-form';
 
-import { FormValue, inputModeMap } from '../../types';
 import { InputMetaDefault } from '../../../../projects/lib/src/lib/types';
+import { FormValue, inputModeMap } from '../../types';
 
 @Component({
   selector: 'app-string-input',
@@ -46,6 +46,6 @@ export class StringInputComponent implements DynamicFormPassThroughControl<Input
     key === undefined
       ? ''
       : this.textTransformer === undefined
-        ? key
-        : this.textTransformer(key);
+      ? key
+      : this.textTransformer(key);
 }
