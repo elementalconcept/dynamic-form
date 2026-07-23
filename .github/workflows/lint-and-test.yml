@@ -2,9 +2,9 @@ name: Lint and test
 
 on:
   push:
-    branches: [ main, v16.x, v1.x ]
+    branches: [ master ]
   pull_request:
-    branches: [ main, v16.x, v1.x ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x ]
+        node-version: [ 24.x ]
 
     steps:
       - uses: actions/checkout@v3
