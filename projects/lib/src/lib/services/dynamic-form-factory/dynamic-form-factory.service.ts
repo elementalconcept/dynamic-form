@@ -42,27 +42,27 @@ export class DynamicFormFactoryService {
 
   mapFormComponent =
     <M, V>(componentMap: DynamicFormComponentMap<M, V>, formGroup: FormGroup, config: DynamicFormConfig<M, V>) =>
-      (element: DynamicFormElement<M, V>): DynamicFormComponentDescriptor<M, V> | null => {
-        if (element.type in componentMap) {
-          const factory = this.componentFactoryResolver.resolveComponentFactory(componentMap[element.type]);
-          const componentRef: ComponentRef<DynamicFormControl<M, V>> = factory.create(this.injector);
+    (element: DynamicFormElement<M, V>): DynamicFormComponentDescriptor<M, V> | null => {
+      if (element.type in componentMap) {
+        const factory = this.componentFactoryResolver.resolveComponentFactory(componentMap[element.type]);
+        const componentRef: ComponentRef<DynamicFormControl<M, V>> = factory.create(this.injector);
 
-          if (componentRef.instance.type === 'passthrough') {
-            componentRef.instance.formGroup = formGroup;
-          }
-
-          componentRef.instance.formControl = formGroup.controls[element.id];
-          componentRef.instance.textTransformer = config.textTransformer;
-          componentRef.instance.dynamicFormElement = element;
-
-          return {
-            config: element,
-            component: componentRef
-          };
+        if (componentRef.instance.type === 'passthrough') {
+          componentRef.instance.formGroup = formGroup;
         }
 
-        return null;
-      };
+        componentRef.instance.formControl = formGroup.controls[element.id];
+        componentRef.instance.textTransformer = config.textTransformer;
+        componentRef.instance.dynamicFormElement = element;
+
+        return {
+          config: element,
+          component: componentRef
+        };
+      }
+
+      return null;
+    };
 
   insertFormControl = <V>(value: V, formGroup: FormGroup) => <M>(element: DynamicFormElement<M, V>) => {
     if (element.type === '_description_') {

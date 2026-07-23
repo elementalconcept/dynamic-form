@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +25,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
 
     StringInputComponent
+  ],
+  providers: [
+    provideHttpClient()
   ],
   imports: [
     BrowserModule,

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { DynamicFormComponentStatus, DynamicFormComponentValue } from '@elemental-concept/dynamic-form';
 
-import { customComponentMap, customConfig, customValue, FormValue } from './types';
 import { TranslationHelperService } from './translation-helper.service';
+import { customComponentMap, customConfig, customValue, FormValue } from './types';
 
 @Component({
   selector: 'app-root',
