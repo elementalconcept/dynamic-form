@@ -10,7 +10,7 @@
     "allowUnreachableCode": false,
     "baseUrl": "./",
     "declaration": false,
-    "downlevelIteration": true,
+    "esModuleInterop": true,
     "exactOptionalPropertyTypes": false,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
