@@ -26,7 +26,6 @@
     "@angular/platform-browser": "^19.2.25",
     "@angular/platform-browser-dynamic": "^19.2.25",
     "@angular/router": "^19.2.25",
-    "@ngneat/until-destroy": "^9.2.3",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "rxjs": "~7.8.0",

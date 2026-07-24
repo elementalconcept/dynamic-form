@@ -1,8 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { asapScheduler, combineLatest, noop, ReplaySubject, Subscription } from 'rxjs';
 import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
@@ -20,7 +29,6 @@ import {
   DynamicFormElementRelationship
 } from '../../types';
 
-@UntilDestroy()
 @Component({
   selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
@@ -51,7 +59,8 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
   constructor(
     private readonly dynamicFormFactory: DynamicFormFactoryService,
-    @Inject(DYNAMIC_FORM_COMPONENT_MAP) componentMap: DynamicFormComponentMap<M, V>
+    @Inject(DYNAMIC_FORM_COMPONENT_MAP) componentMap: DynamicFormComponentMap<M, V>,
+    private readonly destroyRef: DestroyRef
   ) {
     this.componentMap$.next(componentMap);
   }
@@ -107,7 +116,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
         tap(([ config ]) => this.formReady = config instanceof Object),
         // No need to create anything if form is not ready.
         filter(() => this.formReady),
-        untilDestroyed(this)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(this.createForm);
 
@@ -115,7 +124,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
     this.value$
       .pipe(
         filter(() => this.formReady),
-        untilDestroyed(this)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(value => this.formGroup.patchValue(value as any));
 
@@ -125,7 +134,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
     combineLatest([ this.dynamicForm$, this.formRef$.pipe(filter(ref => ref !== undefined)) ])
       .pipe(
         delay(0, asapScheduler),
-        untilDestroyed(this)
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(this.renderForm);
   }
@@ -140,7 +149,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
 
     this.statusChangesSub = this.formGroup
       .statusChanges
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(s =>
         this.statusChanges.emit({
           status: s,
@@ -151,7 +160,7 @@ export class DynamicFormComponent<M, V> implements OnInit {
     this.valueChangesSub = this.formGroup
       .valueChanges
       .pipe(
-        untilDestroyed(this),
+        takeUntilDestroyed(this.destroyRef),
         tap(this.handleRelationships)
       )
       .subscribe(v =>
