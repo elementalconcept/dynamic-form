@@ -25,7 +25,6 @@ import {
   selector: 'dynamic-form[config][value]',
   templateUrl: './dynamic-form.component.html',
   styleUrls: [ './dynamic-form.component.scss' ],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule

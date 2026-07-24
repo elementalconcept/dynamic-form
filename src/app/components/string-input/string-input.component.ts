@@ -9,7 +9,8 @@ import { FormValue, inputModeMap } from '../../types';
 @Component({
   selector: 'app-string-input',
   templateUrl: './string-input.component.html',
-  styleUrls: [ './string-input.component.scss' ]
+  styleUrls: [ './string-input.component.scss' ],
+  standalone: false
 })
 export class StringInputComponent implements DynamicFormPassThroughControl<InputMetaDefault, FormValue> {
   readonly type = 'passthrough';
