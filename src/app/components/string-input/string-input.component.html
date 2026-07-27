@@ -1,8 +1,10 @@
-<p *ngIf="visible && config && formGroup" [formGroup]="formGroup">
-  <label>
-    {{ transform(config.label) }}
-    <input [attr.type]="inputType"
-           [attr.inputmode]="inputMode"
-           [formControlName]="config.id">
-  </label>
-</p>
+@if (visible && config && formGroup) {
+  <p [formGroup]="formGroup">
+    <label>
+      {{ transform(config.label) }}
+      <input [attr.type]="inputType"
+        [attr.inputmode]="inputMode"
+        [formControlName]="config.id">
+      </label>
+    </p>
+  }

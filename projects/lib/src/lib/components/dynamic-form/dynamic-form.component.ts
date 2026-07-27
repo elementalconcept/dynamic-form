@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -34,7 +33,6 @@ import {
   templateUrl: './dynamic-form.component.html',
   styleUrls: [ './dynamic-form.component.scss' ],
   imports: [
-    CommonModule,
     ReactiveFormsModule
   ]
 })

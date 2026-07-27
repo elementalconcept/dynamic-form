@@ -1,16 +1,15 @@
 <ng-content select=".before-form"></ng-content>
 
-<form *ngIf="formReady"
-      [formGroup]="formGroup"
-      (ngSubmit)="onSubmit()">
-
-  <ng-content select=".form-header"></ng-content>
-
-  <div class="df-inputs">
-    <ng-container #formElement></ng-container>
-  </div>
-
-  <ng-content select=".form-footer"></ng-content>
-</form>
+@if (formReady) {
+  <form
+    [formGroup]="formGroup"
+    (ngSubmit)="onSubmit()">
+    <ng-content select=".form-header"></ng-content>
+    <div class="df-inputs">
+      <ng-container #formElement></ng-container>
+    </div>
+    <ng-content select=".form-footer"></ng-content>
+  </form>
+}
 
 <ng-content select=".after-form"></ng-content>
