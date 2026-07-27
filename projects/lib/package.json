@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/elementalconcept/dynamic-form#readme",
   "peerDependencies": {
-    "@angular/common": "^19",
-    "@angular/core": "^19"
+    "@angular/common": "^20",
+    "@angular/core": "^20"
   },
   "dependencies": {
     "tslib": "^2.3.0"
