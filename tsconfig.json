@@ -20,7 +20,7 @@
       "dom"
     ],
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitAny": false,
