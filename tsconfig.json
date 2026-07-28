@@ -2,37 +2,51 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "paths": {
-      "@elemental-concept/dynamic-form": [
-        "dist/lib"
-      ]
-    },
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
     "allowUnreachableCode": false,
     "baseUrl": "./",
     "declaration": false,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": false,
-    "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "importHelpers": true,
-    "module": "ES2022",
     "moduleResolution": "bundler",
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "strict": true,
     "strictPropertyInitialization": false,
-    "target": "ES2022",
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@elemental-concept/dynamic-form": [
+        "dist/lib"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/lib/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/lib/tsconfig.spec.json"
+    }
+  ]
 }
