@@ -10,7 +10,7 @@
     "publish": "npm publish ./dist/lib --access=public",
     "format": "dprint fmt",
     "format:check": "dprint check",
-    "test": "ng test lib --no-watch --browsers ChromeHeadless",
+    "test": "ng test lib --no-watch",
     "test:watch": "ng test lib --browsers ChromeHeadless",
     "prepare": "husky install"
   },
